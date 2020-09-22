@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">TRPSearcher</string>
+    <string name="enter_login">Введите логин</string>
+    <string name="enter_password">Введите пароль</string>
+    <string name="trpsearcher">TRPSearcher</string>
+    <string name="log_in">Войти</string>
+    <string name="register">Впервые здесь? Зарегистрируйтесь!</string>
+</resources>
