@@ -5,4 +5,7 @@
     <string name="trpsearcher">TRPSearcher</string>
     <string name="log_in">Войти</string>
     <string name="register">Впервые здесь? Зарегистрируйтесь!</string>
+    <string name="registration">Регистрация</string>
+    <string name="login">Логин</string>
+    <string name="email">Email</string>
 </resources>
