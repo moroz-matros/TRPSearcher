@@ -8,4 +8,8 @@
     <string name="registration">Регистрация</string>
     <string name="login">Логин</string>
     <string name="email">Email</string>
+    <string name="enter_birthdate">Введите дату рождения</string>
+    <string name="password">Пароль</string>
+    <string name="confirm_password">Подтвердите пароль</string>
+    <string name="registrate">Зарегистрироваться</string>
 </resources>
