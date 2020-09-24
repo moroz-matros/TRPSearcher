@@ -25,7 +25,13 @@
 
     <fragment
         android:id="@+id/nav_chat"
-        android:name="com.example.trpsearcher.ui.board.ChatFragment"
+        android:name="com.example.trpsearcher.ui.chat.ChatFragment"
         android:label="@string/menu_chat"
         tools:layout="@layout/fragment_chat" />
+
+    <fragment
+        android:id="@+id/nav_games"
+        android:name="com.example.trpsearcher.ui.games.GamesFragment"
+        android:label="@string/menu_games"
+        tools:layout="@layout/fragment_games" />
 </navigation>
