@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 public class AuthActivity extends AppCompatActivity {
 
-    private Button signIn;
+    private Button loginButton;
     private TextView registerText;
     private EditText login;
     private EditText password;
@@ -25,27 +25,27 @@ public class AuthActivity extends AppCompatActivity {
         }
     };
 
-    public void onClickRegister(View view){
-        Intent startRegistrationActivity = new Intent(AuthActivity.this, RegistrationActivity.class);
-        startActivity(startRegistrationActivity);
-    }
 
-    public void onClickLogin(View view){
+    private View.OnClickListener onLoginClickListener = new View.OnClickListener(){
 
-    }
+        @Override
+        public void onClick(View view) {
+            Intent startMenuActivity = new Intent(AuthActivity.this, MenuActivity.class);
+            startActivity(startMenuActivity);
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_auth);
 
-        signIn = findViewById(R.id.login_login);
+        loginButton = findViewById(R.id.login_login);
         registerText = findViewById(R.id.login_registration);
         login = findViewById(R.id.login_edit);
         password = findViewById(R.id.login_password);
         registerText.setOnClickListener(onRegisterClickListener);
-
-
-
+        loginButton.setOnClickListener(onLoginClickListener);
 
 
     }
