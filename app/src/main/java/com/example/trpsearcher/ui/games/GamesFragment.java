@@ -1,4 +1,4 @@
-package com.example.trpsearcher.ui.games;
+/*package com.example.trpsearcher.ui.games;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -32,4 +32,4 @@ public class GamesFragment extends Fragment {
         });
         return root;
     }
-}
+}*/

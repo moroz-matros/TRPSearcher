@@ -37,7 +37,7 @@
         />
 
     <EditText
-        android:id="@+id/reg_birthday"
+        android:id="@+id/rg_birthday"
         android:hint="@string/enter_birthdate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -50,14 +50,14 @@
         />
 
     <EditText
-    android:id="@+id/rg_password"
-    android:hint="@string/password"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginLeft="15dp"
-    android:layout_marginRight="15dp"
-    android:inputType="textPassword"
-    />
+        android:id="@+id/rg_password"
+        android:hint="@string/password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:inputType="textPassword"
+        />
 
     <EditText
         android:id="@+id/rg_confirm_password"
@@ -69,7 +69,14 @@
         android:inputType="textPassword"
         />
 
+    <ProgressBar
+        android:id="@+id/loading"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
     <Button
+        android:id="@+id/rg_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
