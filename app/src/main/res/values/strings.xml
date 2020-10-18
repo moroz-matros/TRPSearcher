@@ -28,4 +28,9 @@
     <string name="menu_board">Доска объявлений</string>
     <string name="menu_chat">Чаты</string>
     <string name="menu_games">Мои игры</string>
+    <string name="name">Имя</string>
+    <string name="birthdate">Дата рождения</string>
+    <string name="about_me">О себе</string>
+    <string name="edit">Редактировать</string>
+    <string name="favorites">Любимое</string>
 </resources>

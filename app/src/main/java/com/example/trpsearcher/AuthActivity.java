@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -64,16 +65,17 @@ public class AuthActivity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 try {
+                    Toast.makeText(AuthActivity.this, response, Toast.LENGTH_LONG).show();
                     JSONObject jsonResponse = new JSONObject(response);
                     boolean success = jsonResponse.getBoolean("success");
 
                     if (success) {
-                        //String name = jsonResponse.getString("name");
+                        String login_name = jsonResponse.getString("login");
                         //int age = jsonResponse.getInt("age");
 
                         Intent startMenuActivity = new Intent(AuthActivity.this, MenuActivity.class);
+                        startMenuActivity.putExtra("login", login_name);
                         startActivity(startMenuActivity);
-                        //intent.putExtra("name", name);
                         //intent.putExtra("age", age);
                         //intent.putExtra("username", username);
                     } else {

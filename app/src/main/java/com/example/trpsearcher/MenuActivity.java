@@ -1,13 +1,16 @@
 package com.example.trpsearcher;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
+import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.core.view.MenuItemCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -26,7 +29,6 @@ public class MenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_menu);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
@@ -37,6 +39,16 @@ public class MenuActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+        Intent intent = getIntent();
+        String login = intent.getStringExtra("login");
+        View headerView = navigationView.getHeaderView(0);
+        TextView loginText = (TextView) headerView.findViewById(R.id.menu_login);
+
+
+        //loginText = (TextView) MenuItemCompat.getActionView(navigationView.getMenu().
+                //findItem(R.id.menu_login));
+        //loginText = findViewById(R.id.menu_login);
+        loginText.setText(login);
     }
 
     @Override

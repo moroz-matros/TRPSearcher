@@ -34,6 +34,8 @@ import java.util.Map;
 
 public class RegistrationActivity extends AppCompatActivity {
 
+    //xsqtunwME4vmnkF
+
     private EditText date;
     private EditText login;
     private EditText password;
