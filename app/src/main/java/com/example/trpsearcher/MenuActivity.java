@@ -2,14 +2,17 @@ package com.example.trpsearcher;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
 import android.widget.TextView;
 
+import com.example.trpsearcher.ui.profile.ProfileFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.core.view.GravityCompat;
 import androidx.core.view.MenuItemCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -19,9 +22,13 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-public class MenuActivity extends AppCompatActivity {
+public class MenuActivity extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener
+
+{
 
     private AppBarConfiguration mAppBarConfiguration;
+    private String login;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +47,7 @@ public class MenuActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
         Intent intent = getIntent();
-        String login = intent.getStringExtra("login");
+        login = intent.getStringExtra("login");
         View headerView = navigationView.getHeaderView(0);
         TextView loginText = (TextView) headerView.findViewById(R.id.menu_login);
 
@@ -64,4 +71,30 @@ public class MenuActivity extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
+
+
+            @Override
+            public boolean onNavigationItemSelected (MenuItem item){
+            // Handle navigation view item clicks here.
+            int id = item.getItemId();
+
+            if (id == R.id.nav_profile) {
+                Intent startProfileFragment = new Intent(MenuActivity.this, ProfileFragment.class);
+                startProfileFragment.putExtra("login", login);
+                startActivity(startProfileFragment);
+            } else if (id == R.id.nav_board) {
+
+            } else if (id == R.id.nav_chat) {
+
+            } else if (id == R.id.nav_games) {
+
+            } else if (id == R.id.nav_home) {
+
+            }
+
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
+            return true;
+        }
+
 }

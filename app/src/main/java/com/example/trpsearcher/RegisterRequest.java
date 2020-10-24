@@ -3,12 +3,11 @@ package com.example.trpsearcher;
 import com.android.volley.Response;
 import com.android.volley.toolbox.StringRequest;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 public class RegisterRequest extends StringRequest {
-    private static final String URL = "http://192.168.0.12/register.php";
+    private static final String URL = "http://192.168.0.13/register.php";
     private Map<String, String> params;
 
     public RegisterRequest(String login, String password, String email, String birthdate, Response.Listener<String> listener) {
