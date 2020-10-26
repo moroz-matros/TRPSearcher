@@ -71,10 +71,11 @@ public class AuthActivity extends AppCompatActivity {
 
                     if (success) {
                         String login_name = jsonResponse.getString("login");
-                        //int age = jsonResponse.getInt("age");
+                        Integer user_id = jsonResponse.getInt("id");
 
                         Intent startMenuActivity = new Intent(AuthActivity.this, MenuActivity.class);
                         startMenuActivity.putExtra("login", login_name);
+                        startMenuActivity.putExtra("id", user_id);
                         startActivity(startMenuActivity);
                         //intent.putExtra("age", age);
                         //intent.putExtra("username", username);

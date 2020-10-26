@@ -39,7 +39,7 @@ public class ProfileFragment extends Fragment {
     private EditText about;
     private EditText favorites;
     String profileId;
-    Integer prid;
+    Integer user_id;
     private Button editbtn;
 
     private ProfileViewModel profileViewModel;
@@ -58,10 +58,10 @@ public class ProfileFragment extends Fragment {
         favorites = root.findViewById(R.id.pr_fav_tags);
         Intent intent = getActivity().getIntent();
         String loginString = intent.getStringExtra("login");
+        user_id = intent.getIntExtra("id", 0);
         login.setText(loginString);
         editbtn = root.findViewById(R.id.pr_edit_btn);
         getData(loginString);
-        Toast.makeText(getActivity().getApplicationContext(), prid.toString(), Toast.LENGTH_LONG).show();
         editbtn.setOnClickListener(onEditClickListener);
 
 
@@ -91,7 +91,6 @@ public class ProfileFragment extends Fragment {
                         name.setText(jsonResponse.getString("name"));
                         about.setText(jsonResponse.getString("about"));
                         favorites.setText(jsonResponse.getString("favorites"));
-                        prid = jsonResponse.getInt("id");
                     }
 
                 } catch (JSONException e) {
@@ -140,11 +139,11 @@ public class ProfileFragment extends Fragment {
             }
         };
 
-        EditProfileRequest editProfileRequest = new EditProfileRequest(namet, aboutt, emailt, profileId, responseListener);
-        /*
+        EditProfileRequest editProfileRequest = new EditProfileRequest(namet, aboutt, emailt, user_id, responseListener);
+
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
         requestQueue.add(editProfileRequest);
-        */
+
 
     }
 

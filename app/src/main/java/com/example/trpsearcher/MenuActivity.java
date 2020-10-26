@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.Menu;
 import android.widget.TextView;
 
+import com.example.trpsearcher.ui.board.BoardFragment;
 import com.example.trpsearcher.ui.profile.ProfileFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -29,6 +30,7 @@ public class MenuActivity extends AppCompatActivity
 
     private AppBarConfiguration mAppBarConfiguration;
     private String login;
+    private Integer user_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +50,7 @@ public class MenuActivity extends AppCompatActivity
         NavigationUI.setupWithNavController(navigationView, navController);
         Intent intent = getIntent();
         login = intent.getStringExtra("login");
+        user_id = intent.getIntExtra("id", 0);
         View headerView = navigationView.getHeaderView(0);
         TextView loginText = (TextView) headerView.findViewById(R.id.menu_login);
 
@@ -81,9 +84,12 @@ public class MenuActivity extends AppCompatActivity
             if (id == R.id.nav_profile) {
                 Intent startProfileFragment = new Intent(MenuActivity.this, ProfileFragment.class);
                 startProfileFragment.putExtra("login", login);
+                startProfileFragment.putExtra("id", user_id);
                 startActivity(startProfileFragment);
             } else if (id == R.id.nav_board) {
-
+                Intent startBoardFragment = new Intent(MenuActivity.this, BoardFragment.class);
+                startBoardFragment.putExtra("id", user_id);
+                startActivity(startBoardFragment);
             } else if (id == R.id.nav_chat) {
 
             } else if (id == R.id.nav_games) {
