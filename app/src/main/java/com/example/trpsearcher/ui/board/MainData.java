@@ -1,21 +1,29 @@
 package com.example.trpsearcher.ui.board;
 
 public class MainData {
-    private String image, name;
+    private String title;
+    private String text;
+    private Integer id_owner;
 
-    public String getImage() {
-        return image;
+
+
+    public String getText() {
+        return text;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setText(String text) {
+        this.text = text;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
+
+    public int getId_owner(){return id_owner;}
+
+    public void setId_owner(int id_owner){this.id_owner = id_owner;};
 }
