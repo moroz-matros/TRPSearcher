@@ -5,18 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.chat.ChatFragment"
-    android:id="@+id/fragment_games">
+    tools:context=".ui.chat.ChatActivity">
 
 
     <androidx.core.widget.NestedScrollView
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/gm_scroll_view"
+        android:id="@+id/chms_scroll_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".ui.chat.GamesFragment">
+        tools:context=".ui.chat.ChatActivity">
 
 
         <LinearLayout
@@ -29,17 +28,30 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:id="@+id/gm_recycler_view"
+                android:id="@+id/chms_recycler_view"
                 android:nestedScrollingEnabled="false"
-                tools:listitem="@layout/list_row_game"/>
+                tools:listitem="@layout/list_row_message"/>
 
             <ProgressBar
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/gm_progress_bar"/>
+                android:id="@+id/chms_progress_bar"/>
+
+
 
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Назад"
+        android:id="@+id/chms_back"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Написать"
+        android:id="@+id/chms_send"/>
+
 
 </LinearLayout>

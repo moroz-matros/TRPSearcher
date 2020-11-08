@@ -11,8 +11,10 @@ public class GamesGetRequest extends StringRequest {
     private static final String URL = "http://192.168.0.13/get_games.php";
     private Map<String, String> params;
 
-    public GamesGetRequest(Response.Listener<String> listener) {
+    public GamesGetRequest(Integer id, Response.Listener<String> listener) {
         super(Method.POST, URL, listener, null);
+        params = new HashMap<>();
+        params.put("user_id", id.toString());
     }
 
     @Override

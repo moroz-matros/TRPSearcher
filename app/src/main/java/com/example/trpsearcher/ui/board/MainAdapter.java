@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.trpsearcher.R;
 import com.example.trpsearcher.ui.MessageActivity;
+import com.example.trpsearcher.ui.UserProfileActivity;
 
 import org.w3c.dom.Text;
 
@@ -59,6 +60,16 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
             }
         };
 
+        View.OnClickListener onProfileClickListener = new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent startUserProfileActivity = new Intent(activity, UserProfileActivity.class);
+                startUserProfileActivity.putExtra("id", owner);
+                startUserProfileActivity.putExtra("user_id", user_id);
+                activity.startActivity(startUserProfileActivity);
+            }
+        };
+
         holder.idText.setText(owner.toString());
         holder.btnProfile.setOnClickListener(onProfileClickListener);
         holder.btnMessage.setOnClickListener(onMessageClickListener);
@@ -86,16 +97,6 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
             btnMessage = itemView.findViewById(R.id.bd_message);
         }
     }
-
-    private View.OnClickListener onProfileClickListener = new View.OnClickListener(){
-        @Override
-        public void onClick(View view) {
-            Intent startProfileActivity = new Intent(activity, MessageActivity.class);
-            startProfileActivity.putExtra("id", owner);
-            startProfileActivity.putExtra("user_id", user_id);
-            activity.startActivity(startProfileActivity);
-        }
-    };
 
 
 

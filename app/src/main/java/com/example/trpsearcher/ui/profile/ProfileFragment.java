@@ -99,7 +99,7 @@ public class ProfileFragment extends Fragment {
             }
         };
 
-        ProfileRequest profileRequest = new ProfileRequest(username, responseListener);
+        ProfileRequest profileRequest = new ProfileRequest(user_id, responseListener);
         RequestQueue queue = Volley.newRequestQueue(getActivity().getApplicationContext());
         queue.add(profileRequest);
     }

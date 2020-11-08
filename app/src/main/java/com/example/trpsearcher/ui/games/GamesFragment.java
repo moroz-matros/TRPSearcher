@@ -1,6 +1,7 @@
 package com.example.trpsearcher.ui.games;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,16 +22,20 @@ import org.json.JSONObject;
 
 public class GamesFragment extends Fragment {
 
+    private Integer user_id;
 
-    private GamesViewModel gamesViewModel;
+
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        gamesViewModel =
-                ViewModelProviders.of(this).get(GamesViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_games, container, false);
+                View root = inflater.inflate(R.layout.fragment_games, container, false);
+        Intent intent = getActivity().getIntent();
+        user_id = intent.getIntExtra("id", 0);
         getGames();
         return root;
+
+        //sort by closed
     }
 
     private void getGames(){
@@ -61,7 +66,7 @@ public class GamesFragment extends Fragment {
             }
         };
 
-        GamesGetRequest gamesGetRequest = new GamesGetRequest(responseListener);
+        GamesGetRequest gamesGetRequest = new GamesGetRequest(user_id, responseListener);
         RequestQueue queue = Volley.newRequestQueue(getActivity().getApplicationContext());
         queue.add(gamesGetRequest);
     }

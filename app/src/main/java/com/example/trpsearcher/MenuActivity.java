@@ -8,6 +8,8 @@ import android.view.Menu;
 import android.widget.TextView;
 
 import com.example.trpsearcher.ui.board.BoardFragment;
+import com.example.trpsearcher.ui.chat.ChatFragment;
+import com.example.trpsearcher.ui.games.GamesFragment;
 import com.example.trpsearcher.ui.profile.ProfileFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -91,8 +93,15 @@ public class MenuActivity extends AppCompatActivity
                 startBoardFragment.putExtra("id", user_id);
                 startActivity(startBoardFragment);
             } else if (id == R.id.nav_chat) {
+                Intent startChatFragment = new Intent(MenuActivity.this, ChatFragment.class);
+                startChatFragment.putExtra("id", user_id);
+                startChatFragment.putExtra("login", login);
+                startActivity(startChatFragment);
 
             } else if (id == R.id.nav_games) {
+                Intent startGamesFragment = new Intent(MenuActivity.this, GamesFragment.class);
+                startGamesFragment.putExtra("id", user_id);
+                startActivity(startGamesFragment);
 
             } else if (id == R.id.nav_home) {
 

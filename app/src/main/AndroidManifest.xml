@@ -17,6 +17,8 @@
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".ui.board.CreateFormActivity"></activity>
         <activity android:name=".ui.MessageActivity"></activity>
+        <activity android:name=".ui.UserProfileActivity"></activity>
+        <activity android:name=".ui.chat.ChatActivity"></activity>
         <activity android:name=".RegistrationActivity" />
         <activity android:name=".AuthActivity">
             <intent-filter>
