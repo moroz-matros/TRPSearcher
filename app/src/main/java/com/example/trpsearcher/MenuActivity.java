@@ -2,114 +2,76 @@ package com.example.trpsearcher;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.Menu;
+import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.trpsearcher.ui.board.BoardFragment;
-import com.example.trpsearcher.ui.chat.ChatFragment;
-import com.example.trpsearcher.ui.games.GamesFragment;
-import com.example.trpsearcher.ui.profile.ProfileFragment;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.navigation.NavigationView;
-
-import androidx.core.view.GravityCompat;
-import androidx.core.view.MenuItemCompat;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
-public class MenuActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener
+public class MenuActivity extends AppCompatActivity {
 
-{
-
-    private AppBarConfiguration mAppBarConfiguration;
-    private String login;
+    private String user_login;
     private Integer user_id;
+    Button profile, games, chats, board;
+    TextView text;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_profile, R.id.nav_board, R.id.nav_chat, R.id.nav_games)
-                .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-        NavigationUI.setupWithNavController(navigationView, navController);
+
+        profile = findViewById(R.id.menu_profile);
+        games = findViewById(R.id.menu_games);
+        chats = findViewById(R.id.menu_chats);
+        board = findViewById(R.id.menu_board);
+        text = findViewById(R.id.menu_text);
+        text.setText(R.string.welcome_text);
+
+        profile.setOnClickListener(onButtonClickListener);
+        games.setOnClickListener(onButtonClickListener);
+        chats.setOnClickListener(onButtonClickListener);
+        board.setOnClickListener(onButtonClickListener);
+
         Intent intent = getIntent();
-        login = intent.getStringExtra("login");
+        user_login = intent.getStringExtra("login");
         user_id = intent.getIntExtra("id", 0);
-        View headerView = navigationView.getHeaderView(0);
-        TextView loginText = (TextView) headerView.findViewById(R.id.menu_login);
 
-
-        //loginText = (TextView) MenuItemCompat.getActionView(navigationView.getMenu().
-                //findItem(R.id.menu_login));
-        //loginText = findViewById(R.id.menu_login);
-        loginText.setText(login);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu, menu);
-        return true;
-    }
+    private View.OnClickListener onButtonClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            switch (view.getId()) {
 
-    @Override
-    public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        return NavigationUI.navigateUp(navController, mAppBarConfiguration)
-                || super.onSupportNavigateUp();
-    }
-
-
-            @Override
-            public boolean onNavigationItemSelected (MenuItem item){
-            // Handle navigation view item clicks here.
-            int id = item.getItemId();
-
-            if (id == R.id.nav_profile) {
-                Intent startProfileFragment = new Intent(MenuActivity.this, ProfileFragment.class);
-                startProfileFragment.putExtra("login", login);
-                startProfileFragment.putExtra("id", user_id);
-                startActivity(startProfileFragment);
-            } else if (id == R.id.nav_board) {
-                Intent startBoardFragment = new Intent(MenuActivity.this, BoardFragment.class);
-                startBoardFragment.putExtra("id", user_id);
-                startActivity(startBoardFragment);
-            } else if (id == R.id.nav_chat) {
-                Intent startChatFragment = new Intent(MenuActivity.this, ChatFragment.class);
-                startChatFragment.putExtra("id", user_id);
-                startChatFragment.putExtra("login", login);
-                startActivity(startChatFragment);
-
-            } else if (id == R.id.nav_games) {
-                Intent startGamesFragment = new Intent(MenuActivity.this, GamesFragment.class);
-                startGamesFragment.putExtra("id", user_id);
-                startActivity(startGamesFragment);
-
-            } else if (id == R.id.nav_home) {
-
+                case R.id.menu_profile:
+                    Intent startProfileActivity = new Intent(MenuActivity.this, ProfileActivity.class);
+                    startProfileActivity.putExtra("user_login", user_login);
+                    startProfileActivity.putExtra("user_id", user_id);
+                    startActivity(startProfileActivity);
+                    break;
+                case R.id.menu_chats:
+                    Intent startChatActivity = new Intent(MenuActivity.this, ChatActivity.class);
+                    startChatActivity.putExtra("user_login", user_login);
+                    startChatActivity.putExtra("user_id", user_id);
+                    startActivity(startChatActivity);
+                    break;
+                case R.id.menu_board:
+                    Intent startBoardActivity = new Intent(MenuActivity.this, BoardActivity.class);
+                    startBoardActivity.putExtra("user_login", user_login);
+                    startBoardActivity.putExtra("user_id", user_id);
+                    startActivity(startBoardActivity);
+                    break;
+                case R.id.menu_games:
+                    Intent startGamesActivity = new Intent(MenuActivity.this, GamesActivity.class);
+                    startGamesActivity.putExtra("user_login", user_login);
+                    startGamesActivity.putExtra("user_id", user_id);
+                    startActivity(startGamesActivity);
+                    break;
             }
-
-            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-            drawer.closeDrawer(GravityCompat.START);
-            return true;
         }
+    };
+
+
 
 }

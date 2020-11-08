@@ -40,4 +40,14 @@
     <string name="enter_message">Введите текст сообщения</string>
     <string name="send">Отправить</string>
     <string name="rate">Рейтинг</string>
+    <string name="welcome_to_trps">Добро пожаловать в TRPSearcher!</string>
+    <string name="welcome_text">В этом приложении вы можете найти соигрока или соавтора для какого-либо сюжета. \n Не забудьте заполнить профиль.</string>
+    <string name="back">Назад</string>
+    <string name="failed_get_data">Не удалось получить данные</string>
+    <string name="ratedd">Rate: </string>
+    <string name="failed_edit_profile">Не удалось отредактировать профиль</string>
+    <string name="success_edit_profile">Профиль успешно отредактирован</string>
+    <string name="create">Создать</string>
+    <string name="failed_ger_forms">Не удалось получить объявления</string>
+    <string name="send_message">Написать сообщение</string>
 </resources>

@@ -11,14 +11,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".MenuActivity"
-            android:label="@string/title_activity_menu"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".ui.board.CreateFormActivity"></activity>
-        <activity android:name=".ui.MessageActivity"></activity>
-        <activity android:name=".ui.UserProfileActivity"></activity>
-        <activity android:name=".ui.chat.ChatActivity"></activity>
+        <activity android:name=".MenuActivity" />
+        <activity android:name=".ProfileActivity" />
+        <activity android:name=".BoardActivity" />
+        <activity android:name=".ChatActivity"/>
+        <activity android:name=".GamesActivity"/>
+        <activity android:name=".CreateFormActivity" />
+        <activity android:name=".MessageActivity" />
+        <activity android:name=".UserProfileActivity" />
+        <activity android:name=".MessageChatActivity" />
         <activity android:name=".RegistrationActivity" />
         <activity android:name=".AuthActivity">
             <intent-filter>

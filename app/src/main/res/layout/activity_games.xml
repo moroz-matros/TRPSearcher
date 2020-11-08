@@ -6,17 +6,17 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ChatActivity"
-    android:id="@+id/fragment_chat">
+    android:id="@+id/fragment_games">
 
 
     <androidx.core.widget.NestedScrollView
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/ch_scroll_view"
+        android:id="@+id/gm_scroll_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".ChatActivity">
+        tools:context=".ui.chat.GamesFragment">
 
 
         <LinearLayout
@@ -29,16 +29,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:id="@+id/ch_recycler_view"
+                android:id="@+id/gm_recycler_view"
                 android:nestedScrollingEnabled="false"
-                tools:listitem="@layout/list_row_chat"/>
+                tools:listitem="@layout/list_row_game"/>
 
             <ProgressBar
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/ch_progress_bar"/>
-
-
+                android:id="@+id/gm_progress_bar"/>
 
 
         </LinearLayout>
