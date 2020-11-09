@@ -15,9 +15,10 @@
 
         <TextView
             android:id="@+id/bd_title"
+            android:textColor="#000000"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20dp"/>
+            android:textSize="21dp"/>
 
         <TextView
             android:id="@+id/bd_text"
@@ -37,7 +38,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="Профиль автора"
+                android:text="@string/author_profile"
                 />
             <Button
                 android:id="@+id/bd_message"
@@ -47,10 +48,13 @@
                 android:text="@string/send_message"
                 />
 
-
-
-
         </LinearLayout>
+        <Button
+            android:id="@+id/bd_close_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:text="@string/close_form"/>
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>

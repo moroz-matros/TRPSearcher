@@ -1,4 +1,4 @@
-package com.example.trpsearcher;
+package com.example.trpsearcher.requests;
 
 import com.android.volley.Request;
 import com.android.volley.Response;

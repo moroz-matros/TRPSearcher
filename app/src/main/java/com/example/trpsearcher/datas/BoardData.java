@@ -1,9 +1,10 @@
-package com.example.trpsearcher.adapters;
+package com.example.trpsearcher.datas;
 
 public class BoardData {
+    private Integer id;
     private String title;
     private String text;
-    private Integer owner_id;
+    private Integer user2_id;
 
 
     public String getText() {
@@ -22,7 +23,11 @@ public class BoardData {
         this.title = title;
     }
 
-    public int getOwner_id(){return owner_id;}
+    public Integer getUser2_id() { return user2_id; }
 
-    public void setOwner_id(int owner_id){this.owner_id = owner_id;};
+    public void setUser2_id(Integer user2_id) { this.user2_id = user2_id; }
+
+    public Integer getId() { return id; }
+
+    public void setId(Integer id) { this.id = id; }
 }

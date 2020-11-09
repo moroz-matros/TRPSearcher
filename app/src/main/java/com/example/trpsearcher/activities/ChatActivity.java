@@ -1,4 +1,4 @@
-package com.example.trpsearcher;
+package com.example.trpsearcher.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +14,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
+import com.example.trpsearcher.adapters.ChatAdapter;
+import com.example.trpsearcher.datas.ChatOutData;
+import com.example.trpsearcher.requests.ChatsRequest;
+import com.example.trpsearcher.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,23 +36,25 @@ public class ChatActivity extends AppCompatActivity {
     ChatAdapter adapter;
     int current = 0;
     int maxSize = 0;
-    String login;
+    String user_login;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_message_form);
+        setContentView(R.layout.activity_chat);
         Intent intent = getIntent();
-        user_id = intent.getIntExtra("id", 0);
-        login = intent.getStringExtra("login");
+        user_id = intent.getIntExtra("user_id", 0);
+        user_login = intent.getStringExtra("user_login");
 
         nestedScrollView = findViewById(R.id.ch_scroll_view);
         recyclerView = findViewById(R.id.ch_recycler_view);
         progressBar = findViewById(R.id.ch_progress_bar);
 
-        //Set layout manager
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         getChats();
+
+        //Set layout manager
+        recyclerView.setLayoutManager(new LinearLayoutManager(ChatActivity.this));
+
         //Set adapter
         nestedScrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
             @Override
@@ -56,8 +62,8 @@ public class ChatActivity extends AppCompatActivity {
                 //condition
                 if (scrollY == v.getChildAt(0).getMeasuredHeight() - v.getMeasuredHeight()) {
                     //progressBar
-                    progressBar.setVisibility(View.VISIBLE);
-                    getData();
+                        progressBar.setVisibility(View.VISIBLE);
+                        getData();
                 }
             }
         });
@@ -71,19 +77,15 @@ public class ChatActivity extends AppCompatActivity {
             try{
                 //Init main data
                 ChatOutData data = new ChatOutData();
-                Integer flag = jsonArray.getJSONObject(current).getInt("id_have_new");
-                if (flag == 1){
-                    data.setHas_new(true);
-                } else{
-                    data.setHas_new(false);
-                }
+                int flag = jsonArray.getJSONObject(current).getInt("id_have_new");
+                data.setHas_new(flag == 1);
 
                 JSONObject currentObj = jsonArray.getJSONObject(current);
-                data.setUser(jsonArray.getJSONObject(current).getString("login"));
+                data.setUser2_login(currentObj.getString("login"));
                 data.setUser_id(user_id);
-                data.setUser2_id(jsonArray.getJSONObject(current).getInt("id"));
+                data.setUser2_id(currentObj.getInt("id"));
                 data.setJsonArray(currentObj.getJSONArray("messages"));
-                data.setUser_login(login);
+                data.setUser_login(user_login);
 
                 //Add data
                 dataArrayList.add(data);
@@ -91,13 +93,11 @@ public class ChatActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
             //init adapter
-            adapter = new ChatAdapter(this, dataArrayList, user_id);
+            adapter = new ChatAdapter(this, dataArrayList);
             //set adapter
             recyclerView.setAdapter(adapter);
         }
     }
-
-
 
     private void getChats() {
 
@@ -105,16 +105,17 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 try {
-                    Toast.makeText(ChatActivity.this, response, Toast.LENGTH_LONG).show();
                     JSONObject jsonResponse = new JSONObject(response);
                     boolean success = jsonResponse.getBoolean("success");
-                    jsonArray = jsonResponse.getJSONArray("response");
-                    maxSize = jsonArray.length();
 
                     if (success) {
+                        jsonArray = jsonResponse.getJSONArray("response");
+                        maxSize = jsonArray.length();
                         getData();
-
-
+                    }
+                    else {
+                        progressBar.setVisibility(View.GONE);
+                        Toast.makeText(ChatActivity.this, jsonResponse.getString("response"), Toast.LENGTH_LONG).show();
                     }
 
                 } catch (JSONException e) {
@@ -123,8 +124,16 @@ public class ChatActivity extends AppCompatActivity {
             }
         };
 
-        ChatsRequest chatsRequest = new ChatsRequest(user_id, responseListener);
-        RequestQueue queue = Volley.newRequestQueue(this);
+        String URL = getString(R.string.ip) + getString(R.string.get_chats_php);
+        ChatsRequest chatsRequest = new ChatsRequest(user_id, URL, responseListener);
+        RequestQueue queue = Volley.newRequestQueue(ChatActivity.this);
         queue.add(chatsRequest);
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        finish();
+    }
+
 }

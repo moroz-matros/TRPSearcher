@@ -20,7 +20,7 @@
 
 
         <TextView
-            android:id="@+id/gm_name"
+            android:id="@+id/gm_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="25dp"
@@ -33,16 +33,8 @@
             android:layout_height="wrap_content"
             android:textSize="25dp"
             android:textColor="#000000"
-            android:clickable="true"
             />
-        <TextView
-            android:id="@+id/gm_play"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="25dp"
-            android:textColor="#000000"
-            android:clickable="true"
-            />
+
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>

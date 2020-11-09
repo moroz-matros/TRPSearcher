@@ -12,17 +12,6 @@
     <string name="password">Пароль</string>
     <string name="confirm_password">Подтвердите пароль</string>
     <string name="registrate">Зарегистрироваться</string>
-    <string name="title_activity_menu">MenuActivity</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
-
-    <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
     <string name="menu_home_str">Домашняя страница</string>
     <string name="profile">Профиль</string>
     <string name="menu_board">Доска объявлений</string>
@@ -50,4 +39,19 @@
     <string name="create">Создать</string>
     <string name="failed_ger_forms">Не удалось получить объявления</string>
     <string name="send_message">Написать сообщение</string>
+    <string name="psws_not_eq">Пароли не совпадают</string>
+    <string name="success_register">Пользователь успешно зарегистрирован</string>
+    <string name="ip">http://192.168.0.13/</string>
+    <string name="register_php">register.php</string>
+    <string name="login_php">login.php</string>
+    <string name="profile_php">profile.php</string>
+    <string name="edit_profile_php">edit_profile.php</string>
+    <string name="get_chats_php">get_chats.php</string>
+    <string name="author_profile">Профиль\nавтора</string>
+    <string name="my_forms">Мои объявления</string>
+    <string name="form_close_success">Объявление успешно закрыто. Обновите страницу для актуальных результатов</string>
+    <string name="close_php">close.php</string>
+    <string name="form">form</string>
+    <string name="close_form">Закрыть объявление</string>
+    <string name="enter_game_descr">Введите описание игры</string>
 </resources>

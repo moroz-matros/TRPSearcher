@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".AuthActivity">
+    tools:context=".activities.AuthActivity">
 
     <TextView
         android:text="@string/welcome_to_trps"
@@ -65,6 +65,7 @@
                     android:layout_weight="1"/>
 
             </LinearLayout>
+
 
         <TextView
             android:id="@+id/menu_text"

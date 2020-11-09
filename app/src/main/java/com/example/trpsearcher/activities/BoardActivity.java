@@ -1,4 +1,4 @@
-package com.example.trpsearcher;
+package com.example.trpsearcher.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,6 +15,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
+import com.example.trpsearcher.adapters.BoardAdapter;
+import com.example.trpsearcher.datas.BoardData;
+import com.example.trpsearcher.requests.GetFormsRequest;
+import com.example.trpsearcher.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -25,6 +29,7 @@ import java.util.ArrayList;
 public class BoardActivity extends AppCompatActivity {
 
     private Integer user_id;
+    private String user_login;
     private JSONObject jsonResponse;
     private JSONArray jsonArray;
     private Button createButton, backButton;
@@ -54,6 +59,7 @@ public class BoardActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         user_id = intent.getIntExtra("user_id", 0);
+        user_login = intent.getStringExtra("user_login");
 
         getForms();
 
@@ -81,14 +87,18 @@ public class BoardActivity extends AppCompatActivity {
 
     private void getData() {
         progressBar.setVisibility(View.GONE);
-        int next = current+5;
+        int next = current + 10;
         for (; (current<next) && (current < maxSize); current++){
             try{
                 //Init main data
                 BoardData data = new BoardData();
-                data.setTitle(jsonArray.getJSONObject(current).getString("title"));
-                data.setText(jsonArray.getJSONObject(current).getString("text"));
-                data.setOwner_id(jsonArray.getJSONObject(current).getInt("id_owner"));
+                JSONObject currentObj = jsonArray.getJSONObject(current);
+
+                data.setId(currentObj.getInt("id"));
+                data.setTitle(currentObj.getString("title"));
+                data.setText(currentObj.getString("text"));
+                data.setUser2_id(currentObj.getInt("user2_id"));
+
                 //Add data
                 dataArrayList.add(data);
             } catch (JSONException e) {
@@ -110,11 +120,6 @@ public class BoardActivity extends AppCompatActivity {
         }
     };
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        finish();
-    }
 
     private View.OnClickListener onBackClickListener = new View.OnClickListener(){
         @Override
@@ -150,4 +155,6 @@ public class BoardActivity extends AppCompatActivity {
             RequestQueue queue = Volley.newRequestQueue(BoardActivity.this);
             queue.add(getFormsRequest);
     }
+
+
 }

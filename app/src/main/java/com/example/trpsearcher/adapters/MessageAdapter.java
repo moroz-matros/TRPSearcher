@@ -1,4 +1,4 @@
-package com.example.trpsearcher;
+package com.example.trpsearcher.adapters;
 
 import android.app.Activity;
 import android.graphics.Color;
@@ -10,6 +10,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.trpsearcher.R;
+import com.example.trpsearcher.datas.MessageData;
 
 import java.util.ArrayList;
 

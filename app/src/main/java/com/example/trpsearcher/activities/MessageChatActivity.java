@@ -1,4 +1,4 @@
-package com.example.trpsearcher;
+package com.example.trpsearcher.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,6 +15,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
+import com.example.trpsearcher.requests.ChangeStatusRequest;
+import com.example.trpsearcher.adapters.MessageAdapter;
+import com.example.trpsearcher.datas.MessageData;
+import com.example.trpsearcher.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;

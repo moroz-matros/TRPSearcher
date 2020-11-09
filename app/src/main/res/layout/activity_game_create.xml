@@ -9,10 +9,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".activities.MessageActivity">
+        tools:context=".activitiesGameCreateActivity">
 
         <EditText
-            android:id="@+id/ms_title"
+            android:id="@+id/gmcr_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
@@ -21,16 +21,21 @@
             />
 
         <EditText
-            android:id="@+id/ms_text"
+            android:id="@+id/gmcr_decrt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
-
-
             android:layout_marginRight="15dp"
-            android:hint="@string/enter_message"
-            android:inputType="textLongMessage|textMultiLine"
-            android:lines="2" />
+            android:hint="@string/enter_game_descr"
+            android:inputType="textMultiLine"
+            android:lines="6"
+            android:gravity="top|left"
+            android:scrollbars="vertical" />
+
+        <Spinner
+            android:id="@+id/gmcr_user"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
         <Button
             android:id="@+id/ms_btn_add"
             android:text="@string/send"

@@ -1,4 +1,4 @@
-package com.example.trpsearcher;
+package com.example.trpsearcher.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +12,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
+import com.example.trpsearcher.R;
+import com.example.trpsearcher.requests.ProfileRequest;
+import com.example.trpsearcher.requests.RateRequest;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -38,7 +41,7 @@ import org.json.JSONObject;
             minusBtn.setOnClickListener(onMinusClickListener);
             Intent intent = getIntent();
             user_id = intent.getIntExtra("user_id", 0);
-            cur_id = intent.getIntExtra("owner_id", 0);
+            cur_id = intent.getIntExtra("user2_id", 0);
             fillProfile();
 
         }
@@ -68,7 +71,8 @@ import org.json.JSONObject;
                 }
             };
 
-            ProfileRequest profileRequest = new ProfileRequest(cur_id, responseListener);
+            String URL = getString(R.string.ip) + getString(R.string.profile_php);
+            ProfileRequest profileRequest = new ProfileRequest(cur_id, URL, responseListener);
             RequestQueue queue = Volley.newRequestQueue(UserProfileActivity.this);
             queue.add(profileRequest);
         }

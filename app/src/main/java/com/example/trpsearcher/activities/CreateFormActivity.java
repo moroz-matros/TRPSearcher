@@ -1,4 +1,4 @@
-package com.example.trpsearcher;
+package com.example.trpsearcher.activities;
 
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -13,6 +13,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
+import com.example.trpsearcher.requests.AddFormRequest;
+import com.example.trpsearcher.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;

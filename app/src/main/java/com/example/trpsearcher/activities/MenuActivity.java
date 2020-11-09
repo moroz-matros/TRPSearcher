@@ -1,4 +1,4 @@
-package com.example.trpsearcher;
+package com.example.trpsearcher.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.trpsearcher.R;
 
 public class MenuActivity extends AppCompatActivity {
 
@@ -26,6 +28,7 @@ public class MenuActivity extends AppCompatActivity {
         chats = findViewById(R.id.menu_chats);
         board = findViewById(R.id.menu_board);
         text = findViewById(R.id.menu_text);
+
         text.setText(R.string.welcome_text);
 
         profile.setOnClickListener(onButtonClickListener);
@@ -34,8 +37,8 @@ public class MenuActivity extends AppCompatActivity {
         board.setOnClickListener(onButtonClickListener);
 
         Intent intent = getIntent();
-        user_login = intent.getStringExtra("login");
-        user_id = intent.getIntExtra("id", 0);
+        user_login = intent.getStringExtra("user_login");
+        user_id = intent.getIntExtra("user_id", 0);
 
     }
 

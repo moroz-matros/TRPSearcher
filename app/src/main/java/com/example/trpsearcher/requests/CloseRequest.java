@@ -6,16 +6,14 @@ import com.android.volley.toolbox.StringRequest;
 import java.util.HashMap;
 import java.util.Map;
 
-public class EditProfileRequest extends StringRequest {
+public class CloseRequest extends StringRequest {
     private Map<String, String> params;
 
-    public EditProfileRequest(String name, String about, String email, Integer id, String URL, Response.Listener<String> listener) {
+    public CloseRequest(Integer id, String type, String URL, Response.Listener<String> listener) {
         super(Method.POST, URL, listener, null);
         params = new HashMap<>();
-        params.put("name", name);
-        params.put("about", about);
-        params.put("email", email);
-        params.put("profile_id", id.toString());
+        params.put("id", id.toString());
+        params.put("type", type);
     }
 
     @Override
@@ -23,3 +21,4 @@ public class EditProfileRequest extends StringRequest {
         return params;
     }
 }
+

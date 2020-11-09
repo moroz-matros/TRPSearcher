@@ -1,8 +1,8 @@
-package com.example.trpsearcher;
+package com.example.trpsearcher.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.AlertDialog;
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.text.format.DateUtils;
@@ -11,37 +11,28 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.trpsearcher.ErrorDetector;
+import com.example.trpsearcher.R;
+import com.example.trpsearcher.requests.RegisterRequest;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 public class RegistrationActivity extends AppCompatActivity {
-
-    //xsqtunwME4vmnkF
 
     private EditText date;
     private EditText login;
     private EditText password;
     private EditText c_password;
     private EditText email;
-    private Button btn_reg;
+    private Button regButton;
     private ProgressBar loading;
 
     private Calendar birthday = Calendar.getInstance();
@@ -55,8 +46,8 @@ public class RegistrationActivity extends AppCompatActivity {
         password = findViewById(R.id.rg_password);
         c_password = findViewById(R.id.rg_confirm_password);
         loading = findViewById(R.id.loading);
-        btn_reg = findViewById(R.id.rg_btn);
-        btn_reg.setOnClickListener(onRegClickListener);
+        regButton = findViewById(R.id.rg_btn);
+        regButton.setOnClickListener(onRegClickListener);
 
     }
 
@@ -68,7 +59,6 @@ public class RegistrationActivity extends AppCompatActivity {
                 .show();
     }
 
-    // установка начальных даты и времени
     private void setInitialDateTime() {
 
         date.setText(DateUtils.formatDateTime(this,
@@ -89,17 +79,30 @@ public class RegistrationActivity extends AppCompatActivity {
     private View.OnClickListener onRegClickListener = new View.OnClickListener(){
         @Override
         public void onClick(View view) {
-            AddUser();
-
+            if (check() && checkPassword()) AddUser();
         }
     };
 
+    private boolean checkPassword() {
+        if (!password.getText().toString().equals(c_password.getText().toString())){
+            Toast.makeText(RegistrationActivity.this, getString(R.string.psws_not_eq), Toast.LENGTH_SHORT).show();
+            return false;
+        } else return true;
+    }
+
+    private boolean check() {
+        ErrorDetector ed = new ErrorDetector();
+        return (ed.lengthCheckMax(login, 20) && ed.lengthCheckMin(login, 6)
+        && ed.lengthCheckMin(password, 6) && ed.lengthCheckMax(password, 20)
+        && ed.lengthCheckMax(email, 30) && ed.isNotEmpty(email)
+        && ed.isNotEmpty(date));
+    }
+
     private void AddUser(){
         loading.setVisibility(View.VISIBLE);
-        btn_reg.setVisibility(View.GONE);
+        regButton.setVisibility(View.GONE);
         final String login = this.login.getText().toString();
         final String password = this.password.getText().toString();
-        final String c_psw = c_password.getText().toString();
         final String email = this.email.getText().toString();
         final String birthdate = this.date.getText().toString();
 
@@ -107,36 +110,33 @@ public class RegistrationActivity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 try{
-                    Toast.makeText(RegistrationActivity.this, response, Toast.LENGTH_LONG).show();
                     JSONObject jsonObject = new JSONObject(response);
                     boolean success = jsonObject.getBoolean("success");
                     if (success){
-                        Toast.makeText(RegistrationActivity.this, "Success", Toast.LENGTH_LONG).show();
-                        loading.setVisibility(View.GONE);
-                        btn_reg.setVisibility(View.VISIBLE);
+                        Toast.makeText(RegistrationActivity.this, getString(R.string.success_register), Toast.LENGTH_LONG).show();
                         RegistrationActivity.this.finish();
 
                     }
                     else {
-                        AlertDialog.Builder builder = new AlertDialog.Builder(RegistrationActivity.this);
-                        builder.setMessage("Register Failed")
-                                .create()
-                                .show();
+                        Toast.makeText(RegistrationActivity.this, jsonObject.getString("response"), Toast.LENGTH_LONG).show();
                     }
                 } catch (JSONException e){
                     e.printStackTrace();
-                    Toast.makeText(RegistrationActivity.this, "Error" + e.toString(), Toast.LENGTH_LONG).show();
-                    loading.setVisibility(View.GONE);
-                    btn_reg.setVisibility(View.VISIBLE);
                 }
+                loading.setVisibility(View.GONE);
+                regButton.setVisibility(View.VISIBLE);
             }
         };
-
-        RegisterRequest stringRequest = new RegisterRequest(login, password, email, birthdate, responseListener);
+        String URL = getString(R.string.ip) + getString(R.string.register_php);
+        RegisterRequest stringRequest = new RegisterRequest(login, password, email, birthdate, URL, responseListener);
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
 
-
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        finish();
+    }
 }

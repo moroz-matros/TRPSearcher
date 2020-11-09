@@ -1,4 +1,4 @@
-package com.example.trpsearcher;
+package com.example.trpsearcher.activities;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -14,6 +14,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
+import com.example.trpsearcher.ErrorDetector;
+import com.example.trpsearcher.requests.EditProfileRequest;
+import com.example.trpsearcher.requests.ProfileRequest;
+import com.example.trpsearcher.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -67,7 +71,6 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 try {
-                    Toast.makeText(ProfileActivity.this, response, Toast.LENGTH_LONG).show();
                     JSONObject jsonResponse = new JSONObject(response);
                     boolean success = jsonResponse.getBoolean("success");
 
@@ -82,7 +85,7 @@ public class ProfileActivity extends AppCompatActivity {
 
                     }
                     else {
-                        Toast.makeText(ProfileActivity.this, getString(R.string.failed_get_data), Toast.LENGTH_LONG).show();
+                        Toast.makeText(ProfileActivity.this, jsonResponse.getString("response"), Toast.LENGTH_LONG).show();
                     }
 
                 } catch (JSONException e) {
@@ -91,7 +94,8 @@ public class ProfileActivity extends AppCompatActivity {
             }
         };
 
-        ProfileRequest profileRequest = new ProfileRequest(user_id, responseListener);
+        String URL = getString(R.string.ip) + getString(R.string.profile_php);
+        ProfileRequest profileRequest = new ProfileRequest(user_id, URL, responseListener);
         RequestQueue queue = Volley.newRequestQueue(ProfileActivity.this);
         queue.add(profileRequest);
     }
@@ -99,9 +103,17 @@ public class ProfileActivity extends AppCompatActivity {
     private View.OnClickListener onEditClickListener = new View.OnClickListener(){
         @Override
         public void onClick(View view) {
-            edit();
+            if (check()) edit();
         }
     };
+
+    private boolean check() {
+        ErrorDetector ed = new ErrorDetector();
+        return (ed.lengthCheckMax(name, 20)
+                && ed.lengthCheckMax(email, 30)
+                && ed.lengthCheckMax(about, 255)
+                && ed.isNotEmpty(email));
+    }
 
     private View.OnClickListener onBackClickListener = new View.OnClickListener(){
         @Override
@@ -122,11 +134,10 @@ public class ProfileActivity extends AppCompatActivity {
                     JSONObject jsonObject = new JSONObject(response);
                     boolean success = jsonObject.getBoolean("success");
                     if (success){
-                        Toast.makeText(ProfileActivity.this, getString(R.string.success_edit_profile), Toast.LENGTH_LONG).show();
-
+                        Toast.makeText(ProfileActivity.this, jsonObject.getString("response"), Toast.LENGTH_LONG).show();
                     }
                     else {
-                        Toast.makeText(ProfileActivity.this, getString(R.string.failed_edit_profile), Toast.LENGTH_LONG).show();
+                        Toast.makeText(ProfileActivity.this, jsonObject.getString("response"), Toast.LENGTH_LONG).show();
                     }
                 } catch (JSONException e){
                     e.printStackTrace();
@@ -135,7 +146,8 @@ public class ProfileActivity extends AppCompatActivity {
             }
         };
 
-        EditProfileRequest editProfileRequest = new EditProfileRequest(name_text, about_text, email_text, profile_id, responseListener);
+        String URL = getString(R.string.ip) + getString(R.string.edit_profile_php);
+        EditProfileRequest editProfileRequest = new EditProfileRequest(name_text, about_text, email_text, profile_id, URL, responseListener);
         RequestQueue requestQueue = Volley.newRequestQueue(ProfileActivity.this);
         requestQueue.add(editProfileRequest);
     }

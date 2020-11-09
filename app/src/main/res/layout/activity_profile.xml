@@ -9,7 +9,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ProfileActivity">
+    tools:context=".activities.ProfileActivity">
 
 
     <TextView
@@ -115,10 +115,8 @@
         android:layout_marginLeft="12dp"
         android:layout_marginRight="12dp"
         android:inputType="textMultiLine"
-        android:lines="8"
-        android:minLines="6"
+        android:lines="6"
         android:gravity="top|left"
-        android:maxLines="10"
         android:scrollbars="vertical" />
 
     <TextView

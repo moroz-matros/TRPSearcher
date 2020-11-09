@@ -1,4 +1,4 @@
-package com.example.trpsearcher;
+package com.example.trpsearcher.activities;
 
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -13,6 +13,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
+import com.example.trpsearcher.R;
+import com.example.trpsearcher.requests.SendMessageRequest;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,7 +24,7 @@ public class MessageActivity extends AppCompatActivity {
     private EditText title;
     private EditText text;
     private Button addButton;
-    private Integer user_id, send_to_id;
+    private Integer user_id, user2_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +35,7 @@ public class MessageActivity extends AppCompatActivity {
         addButton = findViewById(R.id.ms_btn_add);
         addButton.setOnClickListener(onAddClickListener);
         Intent intent = getIntent();
-        send_to_id = intent.getIntExtra("send_to_id", 0);
+        user2_id = intent.getIntExtra("user2_id", 0);
         user_id = intent.getIntExtra("user_id", 0);
     }
 
@@ -77,7 +79,7 @@ public class MessageActivity extends AppCompatActivity {
             }
         };
 
-        SendMessageRequest sendMessageRequest = new SendMessageRequest(user_id, send_to_id, titleText, textText, responseListener);
+        SendMessageRequest sendMessageRequest = new SendMessageRequest(user_id, user2_id, titleText, textText, responseListener);
         RequestQueue queue = Volley.newRequestQueue(MessageActivity.this);
         queue.add(sendMessageRequest);
     }

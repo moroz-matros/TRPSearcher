@@ -1,4 +1,4 @@
-package com.example.trpsearcher;
+package com.example.trpsearcher.adapters;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -12,6 +12,10 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.trpsearcher.R;
+import com.example.trpsearcher.activities.MessageChatActivity;
+import com.example.trpsearcher.datas.ChatOutData;
+
 import java.util.ArrayList;
 
 
@@ -19,12 +23,10 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
 
         private ArrayList<ChatOutData> dataArrayList;
         private Activity activity;
-        private Integer user_id;
 
-        public ChatAdapter(Activity activity, ArrayList<ChatOutData> dataArrayList, Integer user_id){
+        public ChatAdapter(Activity activity, ArrayList<ChatOutData> dataArrayList){
             this.activity = activity;
             this.dataArrayList = dataArrayList;
-            this.user_id = user_id;
         }
 
         @NonNull
@@ -42,29 +44,28 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
             final ChatOutData data = dataArrayList.get(position);
 
             //Set name on text View
-            holder.chat.setText(data.getUser());
+            holder.chat.setText(data.getUser2_login());
+
+            //Color for new messages
             if (data.getHas_new()) {
                 holder.cardView.setBackgroundColor(Color.parseColor("#FF7FC1CA"));
             }
-
 
             View.OnClickListener onChatClickListener = new View.OnClickListener(){
                 @Override
                 public void onClick(View view) {
                     Intent startChatActivity = new Intent(activity, MessageChatActivity.class);
-                    startChatActivity.putExtra("user_id", user_id);
-                    startChatActivity.putExtra("user2_id", data.getUser2_id());
-                    startChatActivity.putExtra("jsonArray", data.getJsonArray().toString());
-                    startChatActivity.putExtra("login2", data.getUser());
+                    startChatActivity.putExtra("user_id", data.getUser_id());
                     startChatActivity.putExtra("login", data.getUser_login());
+                    startChatActivity.putExtra("user2_id", data.getUser2_id());
+                    startChatActivity.putExtra("login2", data.getUser2_login());
                     startChatActivity.putExtra("user_hasNew", data.getHas_new());
+                    startChatActivity.putExtra("jsonArray", data.getJsonArray().toString());
                     activity.startActivity(startChatActivity);
-
                 }
             };
 
             holder.chat.setOnClickListener(onChatClickListener);
-
 
         }
 
@@ -77,8 +78,6 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
 
             TextView chat;
             CardView cardView;
-
-
 
             public ViewHolder(@NonNull View itemView) {
                 super(itemView);
