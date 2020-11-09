@@ -1,4 +1,4 @@
-package com.example.trpsearcher;
+package com.example.trpsearcher.adapters;
 
 import com.google.gson.JsonArray;
 
