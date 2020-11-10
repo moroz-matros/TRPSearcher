@@ -51,11 +51,13 @@ public class GamesAdapter extends RecyclerView.Adapter<GamesAdapter.ViewHolder> 
             @Override
             public void onClick(View view) {
                 Intent startGameActivity = new Intent(activity, GameActivity.class);
+                startGameActivity.putExtra("id", data.getId());
                 startGameActivity.putExtra("user_id", data.getUser_id());
                 startGameActivity.putExtra("user2_id", data.getUser2_id());
                 startGameActivity.putExtra("jsonArray", data.getJsonArray().toString());
-                startGameActivity.putExtra("login2", data.getUser2_login());
-                startGameActivity.putExtra("login", data.getUser_login());
+                startGameActivity.putExtra("user2_login", data.getUser2_login());
+                startGameActivity.putExtra("user_login", data.getUser_login());
+                startGameActivity.putExtra("closed", data.getClosed());
                 activity.startActivity(startGameActivity);
             }
         };

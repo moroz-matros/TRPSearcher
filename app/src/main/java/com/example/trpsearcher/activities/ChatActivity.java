@@ -56,6 +56,7 @@ public class ChatActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(ChatActivity.this));
 
         //Set adapter
+        recyclerView.setAdapter(adapter);
         nestedScrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
             @Override
             public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
@@ -135,5 +136,4 @@ public class ChatActivity extends AppCompatActivity {
         super.onPause();
         finish();
     }
-
 }

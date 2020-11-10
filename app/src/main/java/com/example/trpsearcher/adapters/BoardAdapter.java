@@ -40,25 +40,7 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.ViewHolder> 
         this.user_id = user_id;
     }
 
-    private void close(){
-        Response.Listener<String> responseListener = new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    Toast.makeText(activity, response, Toast.LENGTH_LONG).show();
-                    JSONObject jsonResponse = new JSONObject(response);
-                    Toast.makeText(activity, jsonResponse.getString("response"), Toast.LENGTH_LONG).show();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        };
 
-        String URL = activity.getString(R.string.ip) + activity.getString(R.string.close_php);
-        CloseRequest closeRequest = new CloseRequest(user_id, activity.getString(R.string.form), URL, responseListener);
-        RequestQueue queue = Volley.newRequestQueue(activity);
-        queue.add(closeRequest);
-    }
 
     @NonNull
     @Override
@@ -71,7 +53,7 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         //Init main data
-        BoardData data = dataArrayList.get(position);
+        final BoardData data = dataArrayList.get(position);
 
         //Set name on text View
         holder.titleText.setText(data.getTitle());
@@ -110,7 +92,23 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.ViewHolder> 
             View.OnClickListener onCloseClickListener = new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    close();
+                    Response.Listener<String> responseListener = new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            try {
+                                Toast.makeText(activity, response, Toast.LENGTH_LONG).show();
+                                JSONObject jsonResponse = new JSONObject(response);
+                                Toast.makeText(activity, jsonResponse.getString("response"), Toast.LENGTH_LONG).show();
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    };
+
+                    String URL = activity.getString(R.string.ip) + activity.getString(R.string.close_php);
+                    CloseRequest closeRequest = new CloseRequest(data.getId(), 0, URL, responseListener);
+                    RequestQueue queue = Volley.newRequestQueue(activity);
+                    queue.add(closeRequest);
                 }
             };
             holder.btnClose.setOnClickListener(onCloseClickListener);

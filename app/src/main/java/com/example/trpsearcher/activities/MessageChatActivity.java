@@ -116,14 +116,14 @@ public class MessageChatActivity extends AppCompatActivity {
 
     private void getData(){
         progressBar.setVisibility(View.GONE);
-        int next = current+5;
+        int next = current + 5;
         for (; (current<next) && (current < maxSize); current++){
             try{
                 //Init main data
                     MessageData data = new MessageData();
                     Integer sender = messages.getJSONObject(current).getInt("sender");
                     data.setUser_id(sender);
-                    if (sender == user_id){
+                    if (sender.equals(user_id)){
                         data.setLogin(login);
                     } else data.setLogin(login2);
                     data.setTitle(messages.getJSONObject(current).getString("title"));
@@ -150,11 +150,7 @@ public class MessageChatActivity extends AppCompatActivity {
     private View.OnClickListener onBackClickListener = new View.OnClickListener(){
         @Override
         public void onClick(View view) {
-            Intent startMenuActivity = new Intent(MessageChatActivity.this, MenuActivity.class);
-            startMenuActivity.putExtra("login", login);
-            startMenuActivity.putExtra("id", user_id);
-            startActivity(startMenuActivity);
-            
+            finish();
         }
     };
 
@@ -162,9 +158,10 @@ public class MessageChatActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             Intent startMessageActivity = new Intent(MessageChatActivity.this, MessageActivity.class);
-            startMessageActivity.putExtra("send_to_id", user2_id);
+            startMessageActivity.putExtra("user2_id", user2_id);
             startMessageActivity.putExtra("user_id", user_id);
             startActivity(startMessageActivity);
+            finish();
 
         }
     };

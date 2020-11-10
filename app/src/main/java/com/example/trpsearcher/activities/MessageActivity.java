@@ -56,22 +56,8 @@ public class MessageActivity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 try {
-                    Toast.makeText(MessageActivity.this, response, Toast.LENGTH_LONG).show();
                     JSONObject jsonResponse = new JSONObject(response);
-                    boolean success = jsonResponse.getBoolean("success");
-
-                    if (success) {
-                        Toast.makeText(MessageActivity.this, "Сообщение успешно отправлено", Toast.LENGTH_LONG).show();
-                        //int age = jsonResponse.getInt("age");
-                        //intent.putExtra("age", age);
-                        //intent.putExtra("username", username);
-                    } else {
-                        AlertDialog.Builder builder = new AlertDialog.Builder(MessageActivity.this);
-                        builder.setMessage("Не добавлено")
-                                .setNegativeButton("Retry", null)
-                                .create()
-                                .show();
-                    }
+                    Toast.makeText(MessageActivity.this, jsonResponse.getString("response"), Toast.LENGTH_SHORT).show();
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -79,9 +65,11 @@ public class MessageActivity extends AppCompatActivity {
             }
         };
 
-        SendMessageRequest sendMessageRequest = new SendMessageRequest(user_id, user2_id, titleText, textText, responseListener);
+        String URL = getString(R.string.ip) + getString(R.string.send_message_php);
+        SendMessageRequest sendMessageRequest = new SendMessageRequest(user_id, user2_id, titleText, textText, URL, responseListener);
         RequestQueue queue = Volley.newRequestQueue(MessageActivity.this);
         queue.add(sendMessageRequest);
+        finish();
     }
 
 }

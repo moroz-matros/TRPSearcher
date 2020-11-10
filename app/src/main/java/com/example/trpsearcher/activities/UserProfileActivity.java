@@ -51,12 +51,12 @@ import org.json.JSONObject;
                 @Override
                 public void onResponse(String response) {
                     try {
-                        Toast.makeText(UserProfileActivity.this, response, Toast.LENGTH_LONG).show();
                         JSONObject jsonResponse = new JSONObject(response);
                         boolean success = jsonResponse.getBoolean("success");
 
                         if (success) {
 
+                            login.setText(jsonResponse.getString("login"));
                             email.setText(jsonResponse.getString("email"));
                             birthday.setText(jsonResponse.getString("birthdate"));
                             name.setText(jsonResponse.getString("name"));
@@ -98,17 +98,8 @@ import org.json.JSONObject;
                 @Override
                 public void onResponse(String response) {
                     try {
-                        Toast.makeText(UserProfileActivity.this, response, Toast.LENGTH_LONG).show();
                         JSONObject jsonResponse = new JSONObject(response);
-                        boolean success = jsonResponse.getBoolean("success");
-
-                        if (success) {
-
-
-                        }
-                        else {
-                            Toast.makeText(UserProfileActivity.this, "Вы уже оставляли оценку на этого пользователя", Toast.LENGTH_LONG).show();
-                        }
+                        Toast.makeText(UserProfileActivity.this, jsonResponse.getString("response"), Toast.LENGTH_SHORT).show();
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -119,6 +110,7 @@ import org.json.JSONObject;
             RateRequest profileRequest = new RateRequest(user_id, cur_id, i, responseListener);
             RequestQueue queue = Volley.newRequestQueue(UserProfileActivity.this);
             queue.add(profileRequest);
+            finish();
         }
 
 

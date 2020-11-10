@@ -17,7 +17,9 @@
         <activity android:name=".activities.ChatActivity"/>
         <activity android:name=".activities.GamesActivity"/>
         <activity android:name=".activities.CreateFormActivity" />
+        <activity android:name=".activities.CreateGameActivity" />
         <activity android:name=".activities.MessageActivity" />
+        <activity android:name=".activities.GameActivity" />
         <activity android:name=".activities.UserProfileActivity" />
         <activity android:name=".activities.MessageChatActivity" />
         <activity android:name=".activities.RegistrationActivity" />

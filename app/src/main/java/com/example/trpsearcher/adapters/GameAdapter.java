@@ -12,17 +12,18 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.trpsearcher.R;
+import com.example.trpsearcher.datas.GameData;
 import com.example.trpsearcher.datas.MessageData;
 
 import java.util.ArrayList;
 
 
-public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHolder> {
+public class GameAdapter extends RecyclerView.Adapter<GameAdapter.ViewHolder> {
 
-    private ArrayList<MessageData> dataArrayList;
+    private ArrayList<GameData> dataArrayList;
     private Activity activity;
 
-    public MessageAdapter(Activity activity, ArrayList<MessageData> dataArrayList){
+    public GameAdapter(Activity activity, ArrayList<GameData> dataArrayList){
         this.activity = activity;
         this.dataArrayList = dataArrayList;
 
@@ -32,7 +33,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.list_row_message, parent, false);
+                .inflate(R.layout.list_row_game, parent, false);
 
         return new ViewHolder(view);
     }
@@ -40,11 +41,10 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        MessageData data = dataArrayList.get(position);
+        GameData data = dataArrayList.get(position);
 
         //Set name on text View
         holder.login.setText(data.getLogin());
-        holder.title.setText(data.getTitle());
         holder.text.setText(data.getText());
         if (data.getColors().get(data.getUser_id()) == 0){
             holder.cardView.setBackgroundColor(Color.parseColor("#FFEFD5"));
@@ -59,16 +59,16 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView title, text, login;
+        TextView text, login;
         CardView cardView;
+
 
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            title = itemView.findViewById(R.id.chms_title);
-            text = itemView.findViewById(R.id.chms_text);
-            login = itemView.findViewById(R.id.chms_login);
-            cardView = itemView.findViewById(R.id.chms_container);
+            text = itemView.findViewById(R.id.gm_descr);
+            login = itemView.findViewById(R.id.gm_title);
+            cardView = itemView.findViewById(R.id.gm_container);
 
         }
     }

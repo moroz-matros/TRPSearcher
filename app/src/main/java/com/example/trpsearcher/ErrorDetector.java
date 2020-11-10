@@ -26,6 +26,14 @@ public class ErrorDetector {
         else return true;
     }
 
+    public boolean lengthCheckMaxText(EditText editText){
+        if (editText.getText().length() > Math.pow(2, 16)) {
+            editText.setError("Превышен лимит символов (2^16)");
+            return false;
+        }
+        else return true;
+    }
+
     public boolean isNotEmpty(EditText editText){
         if (editText.getText().length() == 0){
             editText.setError("Заполните поле");
@@ -35,7 +43,15 @@ public class ErrorDetector {
 
     }
 
+    public boolean isNotEmpty(TextView textView) {
+        if (textView.getText().length() == 0) {
+            textView.setError("Заполните поле");
+            return false;
+        } else return true;
+    }
 
 
 
-}
+
+
+    }

@@ -1,6 +1,5 @@
 package com.example.trpsearcher.activities;
 
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -31,7 +30,7 @@ public class GamesActivity extends AppCompatActivity {
 
     private Integer user_id;
     private String user_login;
-    private Button createButton, backButton;
+    private Button createButton, backButton, closeButton;
 
     NestedScrollView nestedScrollView;
     RecyclerView recyclerView;
@@ -47,10 +46,10 @@ public class GamesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_games);
+
         Intent intent = getIntent();
         user_id = intent.getIntExtra("user_id", 0);
         user_login = intent.getStringExtra("user_login");
-        getGames();
 
         //sort by closed
 
@@ -60,14 +59,15 @@ public class GamesActivity extends AppCompatActivity {
         createButton.setOnClickListener(onCreateClickListener);
         backButton.setOnClickListener(onBackClickListener);
 
-        nestedScrollView = findViewById(R.id.ch_scroll_view);
-        recyclerView = findViewById(R.id.ch_recycler_view);
-        progressBar = findViewById(R.id.ch_progress_bar);
+        nestedScrollView = findViewById(R.id.gm_scroll_view);
+        recyclerView = findViewById(R.id.gm_recycler_view);
+        progressBar = findViewById(R.id.gm_progress_bar);
+
+        getGames();
 
         //Set layout manager
         recyclerView.setLayoutManager(new LinearLayoutManager(GamesActivity.this));
 
-        //Set adapter
         nestedScrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
             @Override
             public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
@@ -83,7 +83,7 @@ public class GamesActivity extends AppCompatActivity {
 
     private void getData() {
         progressBar.setVisibility(View.GONE);
-        int next = current+5;
+        int next = current + 5;
         for (; (current<next) && (current < maxSize); current++){
             try{
                 //Init main data
@@ -91,14 +91,19 @@ public class GamesActivity extends AppCompatActivity {
 
                 JSONObject currentObj = jsonArray.getJSONObject(current);
 
-                data.setUser2_login(user_login);
+                data.setId(currentObj.getInt("id"));
+
+                data.setUser_id(user_id);
                 data.setUser_login(user_login);
-                data.setUser2_id(currentObj.getInt("id"));
-                data.setUser2_login(currentObj.getString("login"));
+                data.setUser2_id(currentObj.getInt("user2_id"));
+                data.setUser2_login(currentObj.getString("user2_login"));
 
                 data.setTitle(currentObj.getString("title"));
                 data.setDescription(currentObj.getString("description"));
                 data.setJsonArray(currentObj.getJSONArray("game"));
+
+                int flag = currentObj.getInt("closed");
+                data.setClosed(flag == 1);
 
                 //Add data
                 dataArrayList.add(data);
@@ -122,17 +127,14 @@ public class GamesActivity extends AppCompatActivity {
                     boolean success = jsonResponse.getBoolean("success");
 
                     if (success) {
-                        Toast.makeText(GamesActivity.this, "Получены", Toast.LENGTH_LONG).show();
                         jsonArray = jsonResponse.getJSONArray("response");
                         maxSize = jsonArray.length();
+                        getData();
 
 
                     } else {
-                        AlertDialog.Builder builder = new AlertDialog.Builder(GamesActivity.this);
-                        builder.setMessage("Не добавлено")
-                                .setNegativeButton("Retry", null)
-                                .create()
-                                .show();
+                        progressBar.setVisibility(View.GONE);
+                        Toast.makeText(GamesActivity.this, jsonResponse.getString("response"), Toast.LENGTH_LONG).show();
                     }
 
                 } catch (JSONException e) {
@@ -150,8 +152,16 @@ public class GamesActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             Intent startCreateActivity = new Intent(GamesActivity.this, CreateGameActivity.class);
-            startCreateActivity.putExtra("id", user_id);
+            startCreateActivity.putExtra("user_id", user_id);
             startActivity(startCreateActivity);
+        }
+    };
+
+
+    private View.OnClickListener onBackClickListener = new View.OnClickListener(){
+        @Override
+        public void onClick(View view) {
+            GamesActivity.this.finish();
         }
     };
 
@@ -160,11 +170,4 @@ public class GamesActivity extends AppCompatActivity {
         super.onPause();
         finish();
     }
-
-    private View.OnClickListener onBackClickListener = new View.OnClickListener(){
-        @Override
-        public void onClick(View view) {
-            GamesActivity.this.finish();
-        }
-    };
 }

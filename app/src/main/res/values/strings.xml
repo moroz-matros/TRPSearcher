@@ -36,7 +36,6 @@
     <string name="ratedd">Rate: </string>
     <string name="failed_edit_profile">Не удалось отредактировать профиль</string>
     <string name="success_edit_profile">Профиль успешно отредактирован</string>
-    <string name="create">Создать</string>
     <string name="failed_ger_forms">Не удалось получить объявления</string>
     <string name="send_message">Написать сообщение</string>
     <string name="psws_not_eq">Пароли не совпадают</string>
@@ -54,4 +53,14 @@
     <string name="form">form</string>
     <string name="close_form">Закрыть объявление</string>
     <string name="enter_game_descr">Введите описание игры</string>
+    <string name="hint_gmcr">Обратите внимание, что игру можно создать только с тем пользователем, вместе с которым у вас есть активный чат.</string>
+    <string name="create">Создать</string>
+    <string name="choose_player">Выберите соигрока</string>
+    <string name="create_game_php">create_game.php</string>
+    <string name="enter_login_player">Введите логин соигрока</string>
+    <string name="send_post">Отправить пост</string>
+    <string name="send_post_php">send_post.php</string>
+    <string name="close_game">Завершить игру</string>
+    <string name="rate_already_given">Вы уже оставляли оценку на этого пользователя</string>
+    <string name="send_message_php">send_message.php</string>
 </resources>

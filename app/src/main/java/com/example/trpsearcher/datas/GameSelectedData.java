@@ -3,12 +3,11 @@ package com.example.trpsearcher.datas;
 
 import java.util.HashMap;
 
-public class MessageData {
+public class GameSelectedData {
 
     private String login;
     private Integer user_id;
-    private String title;
-    private String text;
+    private String post;
     private HashMap<Integer, Integer> colors;
 
 
@@ -22,6 +21,8 @@ public class MessageData {
     }
 
 
+
+
     public String getLogin() {
         return login;
     }
@@ -32,27 +33,19 @@ public class MessageData {
 
 
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
-
     public HashMap<Integer, Integer> getColors() {
         return colors;
     }
 
     public void setColors(HashMap<Integer, Integer> colors) {
         this.colors = colors;
+    }
+
+    public String getPost() {
+        return post;
+    }
+
+    public void setPost(String post) {
+        this.post = post;
     }
 }

@@ -5,21 +5,45 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activities.MessageChatActivity">
+    tools:context=".activities.GameActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Назад"
+            android:id="@+id/gmsl_back"/>
+        <Button
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="@string/close_game"
+            android:id="@+id/gmsl_close"/>
+
+    </LinearLayout>
+    <EditText
+        android:id="@+id/gmsl_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:inputType="textMultiLine"
+        android:lines="6"
+        android:gravity="top|left"
+        android:scrollbars="vertical" />
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Назад"
-        android:id="@+id/chms_back"/>
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Написать"
-        android:id="@+id/chms_send"/>
+        android:text="@string/send_post"
+        android:id="@+id/gmsl_send"/>
+
+
 
     <androidx.core.widget.NestedScrollView
-        android:id="@+id/chms_scroll_view"
+        android:id="@+id/gmsl_scroll_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:context=".activities.MessageChatActivity">
@@ -35,21 +59,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:id="@+id/chms_recycler_view"
+                android:id="@+id/gmsl_recycler_view"
                 android:nestedScrollingEnabled="false"
-                tools:listitem="@layout/list_row_message"/>
+                tools:listitem="@layout/list_row_game"/>
 
             <ProgressBar
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/chms_progress_bar"/>
+                android:id="@+id/gmsl_progress_bar"/>
 
 
 
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
-
 
 
 </LinearLayout>

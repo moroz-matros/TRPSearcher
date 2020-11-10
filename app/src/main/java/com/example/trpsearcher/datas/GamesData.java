@@ -4,6 +4,8 @@ import org.json.JSONArray;
 
 public class GamesData {
 
+    private Integer id;
+
     private Integer user_id;
     private String user_login;
 
@@ -14,6 +16,11 @@ public class GamesData {
     private String description;
     private JSONArray jsonArray;
 
+    private Boolean closed;
+
+    public Integer getId() { return id;  }
+
+    public void setId(Integer id) {  this.id = id;  }
 
     public void setUser_id(Integer user_id) {
         this.user_id = user_id;
@@ -70,5 +77,14 @@ public class GamesData {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+
+    public Boolean getClosed() {
+        return closed;
+    }
+
+    public void setClosed(Boolean closed) {
+        this.closed = closed;
     }
 }

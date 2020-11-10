@@ -133,7 +133,6 @@ public class BoardActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(String response) {
                     try {
-                        Toast.makeText(BoardActivity.this, response, Toast.LENGTH_LONG).show();
                         jsonResponse = new JSONObject(response);
                         boolean success = jsonResponse.getBoolean("success");
                         jsonArray = jsonResponse.getJSONArray("response");
