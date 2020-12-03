@@ -7,10 +7,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RateRequest extends StringRequest {
-    private static final String URL = "http://192.168.0.13/rate.php";
     private Map<String, String> params;
 
-    public RateRequest(Integer user_id, Integer cur_id, Integer rate, Response.Listener<String> listener) {
+    public RateRequest(Integer user_id, Integer cur_id, Integer rate, String URL, Response.Listener<String> listener) {
         super(Method.POST, URL, listener, null);
         params = new HashMap<>();
         params.put("user_id", user_id.toString());

@@ -7,10 +7,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ChangeStatusRequest extends StringRequest {
-    private static final String URL = "http://192.168.0.13/change_status.php";
-    private Map<String, String> params;
+   private Map<String, String> params;
 
-    public ChangeStatusRequest(Integer user_id, Integer user2_id, Response.Listener<String> listener) {
+    public ChangeStatusRequest(Integer user_id, Integer user2_id, String URL, Response.Listener<String> listener) {
         super(Method.POST, URL, listener, null);
         params = new HashMap<>();
         params.put("id", user_id.toString());

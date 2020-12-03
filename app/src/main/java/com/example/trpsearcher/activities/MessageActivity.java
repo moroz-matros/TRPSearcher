@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
+import com.example.trpsearcher.ErrorDetector;
 import com.example.trpsearcher.R;
 import com.example.trpsearcher.requests.SendMessageRequest;
 
@@ -39,14 +40,22 @@ public class MessageActivity extends AppCompatActivity {
         user_id = intent.getIntExtra("user_id", 0);
     }
 
-    private View.OnClickListener onAddClickListener = new View.OnClickListener(){
+    private View.OnClickListener onAddClickListener = new View.OnClickListener() {
 
         @Override
         public void onClick(View view) {
-           sendMessage();
-           MessageActivity.this.finish();
+            if (check()) {
+                sendMessage();
+                MessageActivity.this.finish();
+            }
         }
     };
+
+    private boolean check(){
+    ErrorDetector ed = new ErrorDetector();
+    return (ed.lengthCheckMax(title, 128) && ed.isNotEmpty(title)
+            && ed.lengthCheckMax(text, 1024) && ed.isNotEmpty(text));
+    }
 
     private void sendMessage(){
         final String titleText = title.getText().toString();

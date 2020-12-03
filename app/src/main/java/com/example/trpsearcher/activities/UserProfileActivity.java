@@ -107,10 +107,12 @@ import org.json.JSONObject;
                 }
             };
 
-            RateRequest profileRequest = new RateRequest(user_id, cur_id, i, responseListener);
+            String URL = getString(R.string.ip) + getString(R.string.rate_php);
+
+            RateRequest profileRequest = new RateRequest(user_id, cur_id, i, URL, responseListener);
             RequestQueue queue = Volley.newRequestQueue(UserProfileActivity.this);
             queue.add(profileRequest);
-            finish();
+            //finish();
         }
 
 

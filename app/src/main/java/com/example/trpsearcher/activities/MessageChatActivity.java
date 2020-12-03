@@ -31,24 +31,25 @@ public class MessageChatActivity extends AppCompatActivity {
 
     private Integer user_id, user2_id;
     private Boolean has_new;
-    private Button back, send;
-    JSONArray messages;
-    NestedScrollView nestedScrollView;
-    RecyclerView recyclerView;
-    ProgressBar progressBar;
-    ArrayList<MessageData> dataArrayList = new ArrayList<>();
-    MessageAdapter adapter;
-    HashMap<Integer, Integer> colors = new HashMap<>();
-    int current = 0;
-    int maxSize = 0;
-    int color = 0;
-    String login, login2;
+    private Button sendButton;
+    private JSONArray messages;
+    private NestedScrollView nestedScrollView;
+    private RecyclerView recyclerView;
+    private ProgressBar progressBar;
+    private ArrayList<MessageData> dataArrayList = new ArrayList<>();
+    private MessageAdapter adapter;
+    private HashMap<Integer, Integer> colors = new HashMap<>();
+    private int current = 0;
+    private int maxSize = 0;
+    private int color = 0;
+    private String login, login2;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message_chat);
+
         Intent intent = getIntent();
         user2_id = intent.getIntExtra("user2_id", 0);
         user_id = intent.getIntExtra("user_id", 0);
@@ -56,10 +57,10 @@ public class MessageChatActivity extends AppCompatActivity {
         login2 = intent.getStringExtra("login2");
         login = intent.getStringExtra("login");
         has_new = intent.getBooleanExtra("user_hasNew", false);
-        back = findViewById(R.id.chms_back);
-        send = findViewById(R.id.chms_send);
-        back.setOnClickListener(onBackClickListener);
-        send.setOnClickListener(onSendClickListener);
+
+        sendButton = findViewById(R.id.chms_send);
+
+        sendButton.setOnClickListener(onSendClickListener);
         if (has_new) changeStatus();
 
         try {
@@ -99,17 +100,14 @@ public class MessageChatActivity extends AppCompatActivity {
                     JSONObject jsonResponse = new JSONObject(response);
                     boolean success = jsonResponse.getBoolean("success");
 
-                    if (success) {
-                        Toast.makeText(getApplicationContext(), response, Toast.LENGTH_LONG).show();
-                    }
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
         };
 
-        ChangeStatusRequest changeStatusRequest = new ChangeStatusRequest(user_id, user2_id, responseListener);
+        String URL = getString(R.string.ip) + getString(R.string.change_status_php);
+        ChangeStatusRequest changeStatusRequest = new ChangeStatusRequest(user_id, user2_id, URL, responseListener);
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
         queue.add(changeStatusRequest);
     }
@@ -147,13 +145,6 @@ public class MessageChatActivity extends AppCompatActivity {
             }
     }
 
-    private View.OnClickListener onBackClickListener = new View.OnClickListener(){
-        @Override
-        public void onClick(View view) {
-            finish();
-        }
-    };
-
     private View.OnClickListener onSendClickListener = new View.OnClickListener(){
         @Override
         public void onClick(View view) {
@@ -161,8 +152,7 @@ public class MessageChatActivity extends AppCompatActivity {
             startMessageActivity.putExtra("user2_id", user2_id);
             startMessageActivity.putExtra("user_id", user_id);
             startActivity(startMessageActivity);
-            finish();
-
+            //finish();
         }
     };
 }

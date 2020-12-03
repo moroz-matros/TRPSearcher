@@ -25,7 +25,7 @@ import org.json.JSONObject;
 public class ProfileActivity extends AppCompatActivity {
 
     private EditText login, email, birthdate, name, about;
-    private Button editButton, backButton;
+    private Button editButton;
     private TextView rate;
 
     private String user_login;
@@ -44,25 +44,23 @@ public class ProfileActivity extends AppCompatActivity {
         about = findViewById(R.id.pr_about_text);
         rate = findViewById(R.id.pr_rate);
         editButton = findViewById(R.id.pr_edit_btn);
-        backButton = findViewById(R.id.pr_back_btn);
 
         Intent intent = getIntent();
         user_login = intent.getStringExtra("user_login");
         user_id = intent.getIntExtra("user_id", 0);
 
         login.setText(user_login);
-        backButton.setOnClickListener(onBackClickListener);
         editButton.setOnClickListener(onEditClickListener);
 
         getData();
 
     }
 
-    @Override
+    /*@Override
     protected void onPause() {
         super.onPause();
         finish();
-    }
+    }*/
 
     private void getData(){
 
@@ -80,12 +78,12 @@ public class ProfileActivity extends AppCompatActivity {
                         birthdate.setText(jsonResponse.getString("birthdate"));
                         name.setText(jsonResponse.getString("name"));
                         about.setText(jsonResponse.getString("about"));
-                        rate.setText(getString(R.string.ratedd) + ' ' + jsonResponse.getString("rate"));
+                        rate.setText(getString(R.string.rate_profile) + ' ' + jsonResponse.getString("rate"));
                         profile_id = jsonResponse.getInt("id");
 
                     }
                     else {
-                        Toast.makeText(ProfileActivity.this, jsonResponse.getString("response"), Toast.LENGTH_LONG).show();
+                        Toast.makeText(ProfileActivity.this, jsonResponse.getString("response"), Toast.LENGTH_SHORT).show();
                     }
 
                 } catch (JSONException e) {
@@ -115,12 +113,6 @@ public class ProfileActivity extends AppCompatActivity {
                 && ed.isNotEmpty(email));
     }
 
-    private View.OnClickListener onBackClickListener = new View.OnClickListener(){
-        @Override
-        public void onClick(View view) {
-            ProfileActivity.this.finish();
-        }
-    };
 
     private void edit(){
         final String name_text = name.getText().toString();
@@ -132,17 +124,12 @@ public class ProfileActivity extends AppCompatActivity {
             public void onResponse(String response) {
                 try{
                     JSONObject jsonObject = new JSONObject(response);
-                    boolean success = jsonObject.getBoolean("success");
-                    if (success){
-                        Toast.makeText(ProfileActivity.this, jsonObject.getString("response"), Toast.LENGTH_LONG).show();
-                    }
-                    else {
-                        Toast.makeText(ProfileActivity.this, jsonObject.getString("response"), Toast.LENGTH_LONG).show();
-                    }
+                    Toast.makeText(ProfileActivity.this, jsonObject.getString("response"), Toast.LENGTH_SHORT).show();
                 } catch (JSONException e){
                     e.printStackTrace();
 
                 }
+
             }
         };
 
@@ -150,6 +137,7 @@ public class ProfileActivity extends AppCompatActivity {
         EditProfileRequest editProfileRequest = new EditProfileRequest(name_text, about_text, email_text, profile_id, URL, responseListener);
         RequestQueue requestQueue = Volley.newRequestQueue(ProfileActivity.this);
         requestQueue.add(editProfileRequest);
+        //finish();
     }
 
 }

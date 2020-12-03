@@ -30,7 +30,7 @@
     <string name="send">Отправить</string>
     <string name="rate">Рейтинг</string>
     <string name="welcome_to_trps">Добро пожаловать в TRPSearcher!</string>
-    <string name="welcome_text">В этом приложении вы можете найти соигрока или соавтора для какого-либо сюжета. \n Не забудьте заполнить профиль.</string>
+    <string name="welcome_text">В этом приложении вы можете найти соигрока или соавтора для какого-либо сюжета.\nНе забудьте заполнить профиль.</string>
     <string name="back">Назад</string>
     <string name="failed_get_data">Не удалось получить данные</string>
     <string name="ratedd">Rate: </string>
@@ -63,4 +63,11 @@
     <string name="close_game">Завершить игру</string>
     <string name="rate_already_given">Вы уже оставляли оценку на этого пользователя</string>
     <string name="send_message_php">send_message.php</string>
+    <string name="get_games">get_games.php</string>
+    <string name="get_forms">get_forms.php</string>
+    <string name="rate_profile">Рейтинг</string>
+    <string name="add_form_php">add_form.php</string>
+    <string name="check_right_fields">Проверьте правильность заполнения полей</string>
+    <string name="change_status_php">change_status.php</string>
+    <string name="rate_php">rate.php</string>
 </resources>

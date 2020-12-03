@@ -30,16 +30,16 @@ public class GamesActivity extends AppCompatActivity {
 
     private Integer user_id;
     private String user_login;
-    private Button createButton, backButton, closeButton;
+    private Button createButton;
 
-    NestedScrollView nestedScrollView;
-    RecyclerView recyclerView;
-    ProgressBar progressBar;
-    ArrayList<GamesData> dataArrayList = new ArrayList<>();
-    GamesAdapter adapter;
+    private NestedScrollView nestedScrollView;
+    private RecyclerView recyclerView;
+    private ProgressBar progressBar;
+    private ArrayList<GamesData> dataArrayList = new ArrayList<>();
+    private GamesAdapter adapter;
     private JSONArray jsonArray;
-    int current = 0;
-    int maxSize = 0;
+    private int current = 0;
+    private int maxSize = 0;
 
 
     @Override
@@ -54,10 +54,8 @@ public class GamesActivity extends AppCompatActivity {
         //sort by closed
 
         createButton = findViewById(R.id.gm_create_btn);
-        backButton = findViewById(R.id.gm_back_btn);
 
         createButton.setOnClickListener(onCreateClickListener);
-        backButton.setOnClickListener(onBackClickListener);
 
         nestedScrollView = findViewById(R.id.gm_scroll_view);
         recyclerView = findViewById(R.id.gm_recycler_view);
@@ -89,6 +87,9 @@ public class GamesActivity extends AppCompatActivity {
                 //Init main data
                 GamesData data = new GamesData();
 
+                int flag = jsonArray.getJSONObject(current).getInt("closed");
+                data.setClosed(flag == 1);
+
                 JSONObject currentObj = jsonArray.getJSONObject(current);
 
                 data.setId(currentObj.getInt("id"));
@@ -102,8 +103,6 @@ public class GamesActivity extends AppCompatActivity {
                 data.setDescription(currentObj.getString("description"));
                 data.setJsonArray(currentObj.getJSONArray("game"));
 
-                int flag = currentObj.getInt("closed");
-                data.setClosed(flag == 1);
 
                 //Add data
                 dataArrayList.add(data);
@@ -122,7 +121,6 @@ public class GamesActivity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 try {
-                    Toast.makeText(GamesActivity.this, response, Toast.LENGTH_LONG).show();
                     JSONObject jsonResponse = new JSONObject(response);
                     boolean success = jsonResponse.getBoolean("success");
 
@@ -131,10 +129,9 @@ public class GamesActivity extends AppCompatActivity {
                         maxSize = jsonArray.length();
                         getData();
 
-
                     } else {
                         progressBar.setVisibility(View.GONE);
-                        Toast.makeText(GamesActivity.this, jsonResponse.getString("response"), Toast.LENGTH_LONG).show();
+                        Toast.makeText(GamesActivity.this, jsonResponse.getString("response"), Toast.LENGTH_SHORT).show();
                     }
 
                 } catch (JSONException e) {
@@ -143,7 +140,9 @@ public class GamesActivity extends AppCompatActivity {
             }
         };
 
-        GamesGetRequest gamesGetRequest = new GamesGetRequest(user_id, responseListener);
+        String URL = getString(R.string.ip) + getString(R.string.get_games);
+
+        GamesGetRequest gamesGetRequest = new GamesGetRequest(user_id, URL, responseListener);
         RequestQueue queue = Volley.newRequestQueue(this);
         queue.add(gamesGetRequest);
     }
@@ -158,16 +157,10 @@ public class GamesActivity extends AppCompatActivity {
     };
 
 
-    private View.OnClickListener onBackClickListener = new View.OnClickListener(){
-        @Override
-        public void onClick(View view) {
-            GamesActivity.this.finish();
-        }
-    };
 
-    @Override
+    /*@Override
     protected void onPause() {
         super.onPause();
         finish();
-    }
+    }*/
 }

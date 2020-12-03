@@ -32,7 +32,7 @@ public class BoardActivity extends AppCompatActivity {
     private String user_login;
     private JSONObject jsonResponse;
     private JSONArray jsonArray;
-    private Button createButton, backButton;
+    private Button createButton;
 
 
     private NestedScrollView nestedScrollView;
@@ -49,13 +49,11 @@ public class BoardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_board);
 
         createButton = findViewById(R.id.bd_create_btn);
-        backButton = findViewById(R.id.bd_back_btn);
         nestedScrollView = findViewById(R.id.scroll_view);
         recyclerView = findViewById(R.id.recycler_view);
         progressBar = findViewById(R.id.progress_bar);
 
         createButton.setOnClickListener(onCreateClickListener);
-        backButton.setOnClickListener(onBackClickListener);
 
         Intent intent = getIntent();
         user_id = intent.getIntExtra("user_id", 0);
@@ -121,13 +119,6 @@ public class BoardActivity extends AppCompatActivity {
     };
 
 
-    private View.OnClickListener onBackClickListener = new View.OnClickListener(){
-        @Override
-        public void onClick(View view) {
-            BoardActivity.this.finish();
-        }
-    };
-
     private void getForms(){
             Response.Listener<String> responseListener = new Response.Listener<String>() {
                 @Override
@@ -149,8 +140,8 @@ public class BoardActivity extends AppCompatActivity {
                 }
 
             };
-
-            GetFormsRequest getFormsRequest = new GetFormsRequest(responseListener);
+            String URL = getString(R.string.ip) + getString(R.string.get_forms);
+            GetFormsRequest getFormsRequest = new GetFormsRequest(user_id, URL, responseListener);
             RequestQueue queue = Volley.newRequestQueue(BoardActivity.this);
             queue.add(getFormsRequest);
     }

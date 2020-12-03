@@ -29,14 +29,14 @@ public class ChatActivity extends AppCompatActivity {
 
     private Integer user_id;
     private JSONArray jsonArray;
-    NestedScrollView nestedScrollView;
-    RecyclerView recyclerView;
-    ProgressBar progressBar;
-    ArrayList<ChatOutData> dataArrayList = new ArrayList<>();
-    ChatAdapter adapter;
+    private NestedScrollView nestedScrollView;
+    private RecyclerView recyclerView;
+    private ProgressBar progressBar;
+    private ArrayList<ChatOutData> dataArrayList = new ArrayList<>();
+    private ChatAdapter adapter;
     int current = 0;
     int maxSize = 0;
-    String user_login;
+    private String user_login;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,9 +131,9 @@ public class ChatActivity extends AppCompatActivity {
         queue.add(chatsRequest);
     }
 
-    @Override
+    /*@Override
     protected void onPause() {
         super.onPause();
         finish();
-    }
+    }*/
 }

@@ -36,10 +36,9 @@ public class CreateGameActivity extends AppCompatActivity {
     private EditText title;
     private EditText description;
     private EditText user;
-    private Spinner spinner;
     private Button createButton;
     private Integer user_id;
-    ArrayList<String> usersLogins = new ArrayList<>();
+    private ArrayList<String> usersLogins = new ArrayList<>();
     private Map<String, Integer> users = new HashMap<>();
 
 
@@ -60,9 +59,6 @@ public class CreateGameActivity extends AppCompatActivity {
 
         getUsers();
 
-
-
-
     }
 
     private View.OnClickListener onCreateClickListener = new View.OnClickListener(){
@@ -74,8 +70,7 @@ public class CreateGameActivity extends AppCompatActivity {
                     create();
                     CreateGameActivity.this.finish();
                 }
-                else Toast.makeText(CreateGameActivity.this, "Невозможно выбрать этого игрока", Toast.LENGTH_SHORT).show();
-            }
+            } else Toast.makeText(CreateGameActivity.this, getString(R.string.check_right_fields), Toast.LENGTH_SHORT).show();
         }
     };
 
@@ -95,9 +90,7 @@ public class CreateGameActivity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 try {
-                    Toast.makeText(CreateGameActivity.this, response, Toast.LENGTH_SHORT).show();
                     JSONObject jsonResponse = new JSONObject(response);
-                    boolean success = jsonResponse.getBoolean("success");
                     Toast.makeText(CreateGameActivity.this, jsonResponse.getString("response"), Toast.LENGTH_SHORT).show();
 
                 } catch (JSONException e) {

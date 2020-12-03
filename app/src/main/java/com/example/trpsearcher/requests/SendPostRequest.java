@@ -9,9 +9,10 @@ import java.util.Map;
 public class SendPostRequest extends StringRequest {
     private Map<String, String> params;
 
-    public SendPostRequest(Integer user_id, Integer user2_id, String text, String URL, Response.Listener<String> listener) {
+    public SendPostRequest(Integer id, Integer user_id, Integer user2_id, String text, String URL, Response.Listener<String> listener) {
         super(Method.POST, URL, listener, null);
         params = new HashMap<>();
+        params.put("id", id.toString());
         params.put("user_id", user_id.toString());
         params.put("user2_id", user2_id.toString());
         params.put("text", text);

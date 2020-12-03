@@ -14,8 +14,8 @@ public class MenuActivity extends AppCompatActivity {
 
     private String user_login;
     private Integer user_id;
-    Button profile, games, chats, board;
-    TextView text;
+    private Button profile, games, chats, board;
+    private TextView text;
 
 
     @Override

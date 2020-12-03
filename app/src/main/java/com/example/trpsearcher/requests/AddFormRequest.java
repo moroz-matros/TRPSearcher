@@ -8,10 +8,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AddFormRequest extends StringRequest {
-    private static final String URL = "http://192.168.0.13/add_form.php";
     private Map<String, String> params;
 
-    public AddFormRequest(String title, String text, Integer id, Response.Listener<String> listener) {
+    public AddFormRequest(String title, String text, Integer id, String URL, Response.Listener<String> listener) {
         super(Request.Method.POST, URL, listener, null);
         params = new HashMap<>();
         params.put("title", title);

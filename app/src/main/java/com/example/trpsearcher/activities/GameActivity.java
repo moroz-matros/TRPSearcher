@@ -33,21 +33,21 @@ import java.util.HashMap;
 public class GameActivity extends AppCompatActivity {
 
     private Integer id, user_id, user2_id;
-    private Button backButton, sendButton, closeButton;
+    private Button sendButton, closeButton;
     private JSONArray game;
     private Boolean closed;
 
-    NestedScrollView nestedScrollView;
-    RecyclerView recyclerView;
-    ProgressBar progressBar;
-    ArrayList<GameData> dataArrayList = new ArrayList<>();
-    GameAdapter adapter;
-    HashMap<Integer, Integer> colors = new HashMap<>();
-    int current = 0;
-    int maxSize = 0;
-    int color = 0;
-    String user_login, user2_login;
-    EditText post;
+    private NestedScrollView nestedScrollView;
+    private RecyclerView recyclerView;
+    private ProgressBar progressBar;
+    private ArrayList<GameData> dataArrayList = new ArrayList<>();
+    private GameAdapter adapter;
+    private HashMap<Integer, Integer> colors = new HashMap<>();
+    private int current = 0;
+    private int maxSize = 0;
+    private int color = 0;
+    private String user_login, user2_login;
+    private EditText post;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,11 +63,9 @@ public class GameActivity extends AppCompatActivity {
         user_login = intent.getStringExtra("user_login");
         closed = intent.getBooleanExtra("closed", false);
 
-        backButton = findViewById(R.id.gmsl_back);
         sendButton = findViewById(R.id.gmsl_send);
         closeButton = findViewById(R.id.gmsl_close);
         post = findViewById(R.id.gmsl_text);
-        backButton.setOnClickListener(onBackClickListener);
         sendButton.setOnClickListener(onSendClickListener);
         closeButton.setOnClickListener(onCloseClickListener);
 
@@ -140,12 +138,6 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
-    private View.OnClickListener onBackClickListener = new View.OnClickListener(){
-        @Override
-        public void onClick(View view) {
-            finish();
-        }
-    };
 
     private View.OnClickListener onCloseClickListener = new View.OnClickListener(){
         @Override
@@ -154,7 +146,6 @@ public class GameActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(String response) {
                     try {
-                        Toast.makeText(GameActivity.this, response, Toast.LENGTH_LONG).show();
                         JSONObject jsonResponse = new JSONObject(response);
                         Toast.makeText(GameActivity.this, jsonResponse.getString("response"), Toast.LENGTH_LONG).show();
                     } catch (JSONException e) {
@@ -166,6 +157,7 @@ public class GameActivity extends AppCompatActivity {
             CloseRequest closeRequest = new CloseRequest(id, 1, URL, responseListener);
             RequestQueue queue = Volley.newRequestQueue(GameActivity.this);
             queue.add(closeRequest);
+            finish();
         }
     };
 
@@ -180,7 +172,6 @@ public class GameActivity extends AppCompatActivity {
                     public void onResponse(String response) {
                         try {
                             JSONObject jsonResponse = new JSONObject(response);
-                            boolean success = jsonResponse.getBoolean("success");
                             Toast.makeText(GameActivity.this, jsonResponse.getString("response"), Toast.LENGTH_LONG).show();
 
                         } catch (JSONException e) {
@@ -190,11 +181,11 @@ public class GameActivity extends AppCompatActivity {
                 };
 
                 String URL = getString(R.string.ip) + getString(R.string.send_post_php);
-                SendPostRequest sendPostRequest = new SendPostRequest(user_id, user2_id, text, URL, responseListener);
+                SendPostRequest sendPostRequest = new SendPostRequest(id, user_id, user2_id, text, URL, responseListener);
                 RequestQueue queue = Volley.newRequestQueue(GameActivity.this);
                 queue.add(sendPostRequest);
+                finish();
             }
-        finish();
         }
     };
 

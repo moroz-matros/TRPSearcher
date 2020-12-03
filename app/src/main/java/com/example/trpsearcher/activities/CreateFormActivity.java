@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
+import com.example.trpsearcher.ErrorDetector;
 import com.example.trpsearcher.requests.AddFormRequest;
 import com.example.trpsearcher.R;
 
@@ -44,10 +45,18 @@ public class CreateFormActivity extends AppCompatActivity {
 
         @Override
         public void onClick(View view) {
-            add();
-            CreateFormActivity.this.finish();
+            if (check()) {
+                add();
+                CreateFormActivity.this.finish();
+            }
         }
     };
+
+    private boolean check() {
+        ErrorDetector ed = new ErrorDetector();
+        return (ed.lengthCheckMax(title, 128) && ed.isNotEmpty(title)
+                && ed.lengthCheckMaxText(text) && ed.isNotEmpty(text));
+    }
 
     private void add(){
         final String titleText = title.getText().toString();
@@ -57,30 +66,15 @@ public class CreateFormActivity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 try {
-                    Toast.makeText(CreateFormActivity.this, response, Toast.LENGTH_LONG).show();
                     JSONObject jsonResponse = new JSONObject(response);
-                    boolean success = jsonResponse.getBoolean("success");
-
-                    if (success) {
-                        Toast.makeText(CreateFormActivity.this, "Объявление успешно добавлено", Toast.LENGTH_LONG).show();
-                        //int age = jsonResponse.getInt("age");
-                        //intent.putExtra("age", age);
-                        //intent.putExtra("username", username);
-                    } else {
-                        AlertDialog.Builder builder = new AlertDialog.Builder(CreateFormActivity.this);
-                        builder.setMessage("Не добавлено")
-                                .setNegativeButton("Retry", null)
-                                .create()
-                                .show();
-                    }
-
+                    Toast.makeText(CreateFormActivity.this, jsonResponse.getString("response"), Toast.LENGTH_LONG).show();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
         };
-
-        AddFormRequest addRequest = new AddFormRequest(titleText, textText, user_id, responseListener);
+        String URL = getString(R.string.ip) + getString(R.string.add_form_php);
+        AddFormRequest addRequest = new AddFormRequest(titleText, textText, user_id, URL, responseListener);
         RequestQueue queue = Volley.newRequestQueue(CreateFormActivity.this);
         queue.add(addRequest);
     }

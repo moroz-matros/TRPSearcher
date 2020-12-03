@@ -96,7 +96,6 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.ViewHolder> 
                         @Override
                         public void onResponse(String response) {
                             try {
-                                Toast.makeText(activity, response, Toast.LENGTH_LONG).show();
                                 JSONObject jsonResponse = new JSONObject(response);
                                 Toast.makeText(activity, jsonResponse.getString("response"), Toast.LENGTH_LONG).show();
                             } catch (JSONException e) {
