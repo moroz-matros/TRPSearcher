@@ -55,13 +55,6 @@ public class ProfileActivity extends AppCompatActivity {
         getData();
 
     }
-
-    /*@Override
-    protected void onPause() {
-        super.onPause();
-        finish();
-    }*/
-
     private void getData(){
 
         Response.Listener<String> responseListener = new Response.Listener<String>() {

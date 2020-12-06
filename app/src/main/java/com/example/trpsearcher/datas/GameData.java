@@ -1,16 +1,12 @@
 package com.example.trpsearcher.datas;
 
-
 import java.util.HashMap;
 
 public class GameData {
-
     private String login;
     private Integer user_id;
     private String text;
     private HashMap<Integer, Integer> colors;
-
-
 
     public void setUser_id(Integer user_id) {
         this.user_id = user_id;
@@ -20,9 +16,6 @@ public class GameData {
         return user_id;
     }
 
-
-
-
     public String getLogin() {
         return login;
     }
@@ -30,8 +23,6 @@ public class GameData {
     public void setLogin(String login) {
         this.login = login;
     }
-
-
 
     public String getText() {
         return text;

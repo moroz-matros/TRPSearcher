@@ -79,7 +79,6 @@ public class GamesData {
         this.description = description;
     }
 
-
     public Boolean getClosed() {
         return closed;
     }

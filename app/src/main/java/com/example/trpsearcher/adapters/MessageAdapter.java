@@ -25,7 +25,6 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     public MessageAdapter(Activity activity, ArrayList<MessageData> dataArrayList){
         this.activity = activity;
         this.dataArrayList = dataArrayList;
-
     }
 
     @NonNull
@@ -33,7 +32,6 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.list_row_message, parent, false);
-
         return new ViewHolder(view);
     }
 
@@ -62,7 +60,6 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         TextView title, text, login;
         CardView cardView;
 
-
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.chms_title);
@@ -72,8 +69,5 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
 
         }
     }
-
-
-
 }
 

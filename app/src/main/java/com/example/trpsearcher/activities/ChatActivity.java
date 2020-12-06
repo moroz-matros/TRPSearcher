@@ -131,9 +131,4 @@ public class ChatActivity extends AppCompatActivity {
         queue.add(chatsRequest);
     }
 
-    /*@Override
-    protected void onPause() {
-        super.onPause();
-        finish();
-    }*/
 }

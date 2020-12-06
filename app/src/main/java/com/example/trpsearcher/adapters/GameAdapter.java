@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.trpsearcher.R;
 import com.example.trpsearcher.datas.GameData;
-import com.example.trpsearcher.datas.MessageData;
 
 import java.util.ArrayList;
 
@@ -62,8 +61,6 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.ViewHolder> {
         TextView text, login;
         CardView cardView;
 
-
-
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             text = itemView.findViewById(R.id.gm_descr);
@@ -72,8 +69,5 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.ViewHolder> {
 
         }
     }
-
-
-
 }
 

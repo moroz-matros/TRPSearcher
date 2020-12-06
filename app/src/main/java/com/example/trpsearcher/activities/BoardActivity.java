@@ -61,15 +61,10 @@ public class BoardActivity extends AppCompatActivity {
 
         getForms();
 
-        //Init adapter
-
-        adapter = new BoardAdapter(this, dataArrayList, user_id);
 
         //Set layout manager
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        //Set adapter
-        recyclerView.setAdapter(adapter);
         nestedScrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
                 @Override
                 public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
@@ -126,13 +121,16 @@ public class BoardActivity extends AppCompatActivity {
                     try {
                         jsonResponse = new JSONObject(response);
                         boolean success = jsonResponse.getBoolean("success");
-                        jsonArray = jsonResponse.getJSONArray("response");
-                        maxSize = jsonArray.length();
 
                         if (success) {
+                            jsonArray = jsonResponse.getJSONArray("response");
+                            maxSize = jsonArray.length();
                             getData();
                         } else {
-                            Toast.makeText(BoardActivity.this, getString(R.string.failed_ger_forms), Toast.LENGTH_LONG).show();
+                            Toast.makeText(BoardActivity.this, jsonResponse.getString("response"), Toast.LENGTH_LONG).show();
+                            if (jsonResponse.getString("response").matches(getString(R.string.no_forms))){
+                                progressBar.setVisibility(View.GONE);
+                            }
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();

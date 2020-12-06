@@ -54,7 +54,6 @@ public class GamesActivity extends AppCompatActivity {
         //sort by closed
 
         createButton = findViewById(R.id.gm_create_btn);
-
         createButton.setOnClickListener(onCreateClickListener);
 
         nestedScrollView = findViewById(R.id.gm_scroll_view);
@@ -156,11 +155,4 @@ public class GamesActivity extends AppCompatActivity {
         }
     };
 
-
-
-    /*@Override
-    protected void onPause() {
-        super.onPause();
-        finish();
-    }*/
 }

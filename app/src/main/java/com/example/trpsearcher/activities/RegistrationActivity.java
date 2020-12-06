@@ -2,7 +2,6 @@ package com.example.trpsearcher.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.text.format.DateUtils;
@@ -131,13 +130,7 @@ public class RegistrationActivity extends AppCompatActivity {
         RegisterRequest stringRequest = new RegisterRequest(login, password, email, birthdate, URL, responseListener);
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
-        finish();
 
     }
 
-    /*@Override
-    protected void onPause() {
-        super.onPause();
-        finish();
-    }*/
 }

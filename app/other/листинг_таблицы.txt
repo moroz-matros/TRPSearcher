@@ -1,0 +1,100 @@
+CREATE TABLE `chats` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `id1` int(10) UNSIGNED NOT NULL,
+  `id2` int(10) UNSIGNED NOT NULL,
+  `messages` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`messages`)),
+  `id1_have_new` tinyint(1) NOT NULL,
+  `id2_have_new` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+CREATE TABLE `forms` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `id_owner` int(10) UNSIGNED NOT NULL,
+  `title` char(128) NOT NULL,
+  `text` text NOT NULL,
+  `closed` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `games` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `id1` int(10) UNSIGNED NOT NULL,
+  `id2` int(10) UNSIGNED NOT NULL,
+  `title` char(128) NOT NULL,
+  `description` text NOT NULL,
+  `game` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `closed` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `profiles` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `user_id` int(10) UNSIGNED NOT NULL,
+  `name` char(20) NOT NULL,
+  `email` char(30) NOT NULL,
+  `birthdate` char(30) NOT NULL,
+  `about` char(255) NOT NULL,
+  `rate` int(11) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `ratings` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `from_id` int(10) UNSIGNED NOT NULL,
+  `to_id` int(10) UNSIGNED NOT NULL,
+  `is_good` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `users` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `login` char(20) NOT NULL,
+  `password` char(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+ALTER TABLE `chats`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `forms`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `games`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `profiles`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `chats`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+ALTER TABLE `forms`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+ALTER TABLE `games`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+ALTER TABLE `profiles`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+ALTER TABLE `ratings`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+ALTER TABLE `users`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+ALTER TABLE `chats`
+  ADD CONSTRAINT `chats_ibfk_1` FOREIGN KEY (`id1`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `chats_ibfk_2` FOREIGN KEY (`id2`) REFERENCES `users` (`id`);
+
+ALTER TABLE `forms`
+  ADD CONSTRAINT `forms_ibfk_1` FOREIGN KEY (`id_owner`) REFERENCES `users` (`id`);
+
+ALTER TABLE `games`
+  ADD CONSTRAINT `games_ibfk_1` FOREIGN KEY (`id1`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `games_ibfk_2` FOREIGN KEY (`id2`) REFERENCES `users` (`id`);
+
+ALTER TABLE `profiles`
+  ADD CONSTRAINT `profiles_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+ALTER TABLE `ratings`
+  ADD CONSTRAINT `ratings_ibfk_1` FOREIGN KEY (`to_id`) REFERENCES `users` (`id`);

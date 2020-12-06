@@ -16,7 +16,6 @@ import java.util.Map;
             params.put("user2_id", send_to_id.toString());
             params.put("title", title);
             params.put("message", message);
-
         }
 
         @Override

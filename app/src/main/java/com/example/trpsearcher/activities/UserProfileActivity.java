@@ -114,6 +114,4 @@ import org.json.JSONObject;
             queue.add(profileRequest);
             //finish();
         }
-
-
     }

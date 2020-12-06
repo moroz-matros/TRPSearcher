@@ -1,8 +1,5 @@
 package com.example.trpsearcher.datas;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-
 import org.json.JSONArray;
 
 public class ChatOutData {
@@ -54,7 +51,4 @@ public class ChatOutData {
     public void setHas_new(Boolean has_new) {
         this.has_new = has_new;
     }
-
-
-
 }

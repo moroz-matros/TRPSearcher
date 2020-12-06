@@ -6,7 +6,6 @@ public class BoardData {
     private String text;
     private Integer user2_id;
 
-
     public String getText() {
         return text;
     }

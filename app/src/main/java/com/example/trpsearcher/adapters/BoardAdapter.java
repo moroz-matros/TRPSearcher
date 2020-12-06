@@ -16,11 +16,9 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
 import com.example.trpsearcher.R;
-import com.example.trpsearcher.activities.ChatActivity;
 import com.example.trpsearcher.activities.MessageActivity;
 import com.example.trpsearcher.activities.UserProfileActivity;
 import com.example.trpsearcher.datas.BoardData;
-import com.example.trpsearcher.requests.ChatsRequest;
 import com.example.trpsearcher.requests.CloseRequest;
 
 import org.json.JSONException;
@@ -137,7 +135,4 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.ViewHolder> 
             btnClose = itemView.findViewById(R.id.bd_close_btn);
         }
     }
-
-
-
 }

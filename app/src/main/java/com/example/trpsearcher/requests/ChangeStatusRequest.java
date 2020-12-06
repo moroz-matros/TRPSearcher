@@ -2,7 +2,6 @@ package com.example.trpsearcher.requests;
 
 import com.android.volley.Response;
 import com.android.volley.toolbox.StringRequest;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,7 +14,6 @@ public class ChangeStatusRequest extends StringRequest {
         params.put("id", user_id.toString());
         params.put("id2", user2_id.toString());
     }
-
     @Override
     public Map<String, String> getParams() {
         return params;

@@ -25,7 +25,6 @@
     <string name="create_form">Создать объявление</string>
     <string name="title">Заголовок</string>
     <string name="place_form">Разместить объявление</string>
-    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
     <string name="enter_message">Введите текст сообщения</string>
     <string name="send">Отправить</string>
     <string name="rate">Рейтинг</string>
@@ -70,4 +69,9 @@
     <string name="check_right_fields">Проверьте правильность заполнения полей</string>
     <string name="change_status_php">change_status.php</string>
     <string name="rate_php">rate.php</string>
+    <string name="enter_text_form">Введите текст объявления</string>
+    <string name="write">Написать</string>
+    <string name="plus">Похвалить</string>
+    <string name="minus">Пожаловаться</string>
+    <string name="no_forms">Нет заявок</string>
 </resources>
